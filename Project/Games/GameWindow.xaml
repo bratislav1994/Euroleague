@@ -1,0 +1,128 @@
+﻿<Window x:Class="Project.Games.GameWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Project.Games"
+        mc:Ignorable="d"
+        Title="Game" Height="400" Width="760">
+    <Grid>
+        <Grid.Background>
+            <ImageBrush ImageSource="/Project;component/Images/game.jpg" />
+        </Grid.Background>
+
+        <TextBox BorderThickness="0" FontSize="16" Text ="{Binding FirstTeam, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" BorderBrush="Transparent" IsReadOnly="True" Foreground="White" Background="Transparent" HorizontalAlignment="Left" Height="23" Margin="85,12,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <TextBox BorderThickness="0" FontSize="16" Text ="{Binding SecondTeam, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" BorderBrush="Transparent" IsReadOnly="True" Foreground="White" Background="Transparent" HorizontalAlignment="Left" Height="23" Margin="500,12,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <TextBox BorderThickness="0" FontSize="16" Text ="{Binding FirstPts, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" IsReadOnly="True" Foreground="White" BorderBrush="Transparent" Background="Transparent" HorizontalAlignment="Left" Height="25" Margin="310,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="35"/>
+        <TextBox BorderThickness="0" FontSize="16" Text ="{Binding SecondPts, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" IsReadOnly="True" Foreground="White" BorderBrush="Transparent" Background="Transparent" HorizontalAlignment="Left" Height="25" Margin="405,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="35"/>
+
+        <Grid Background="Transparent" Margin="75,45,82,0">
+
+            <DataGrid Visibility="{Binding HomeTableAdminVisibility, Mode=TwoWay}" IsReadOnly="True" BorderBrush="Transparent" Foreground="Black" Background="Transparent" RowBackground="Transparent" ItemsSource="{Binding PlayersHome,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" CanUserAddRows="false" AutoGenerateColumns="False" HeadersVisibility="Column" CanUserResizeRows="False" Margin="15,0,290,49" >
+                <DataGrid.Resources>
+                    <Style TargetType="{x:Type DataGridColumnHeader}">
+                        <Setter Property="Background" Value="#cc8400" />
+
+                    </Style>
+
+                </DataGrid.Resources>
+
+                <DataGrid.Columns>
+
+                    <DataGridTextColumn Width="120" Header="Name" FontWeight="Bold" Binding="{Binding Name}"/>
+                    <DataGridTextColumn Width="30" Header="Pts" Binding="{Binding Pts}"/>
+                    <DataGridTextColumn Width="30" Header="As" Binding="{Binding Assist}"/>
+                    <DataGridTextColumn Width="30" Header="Reb" Binding="{Binding Reb}"/>
+                    <DataGridTemplateColumn Header="Command" Width="*">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Button Name="DeleteBatch" Width="50"
+            Content="Detail"
+            Command="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type DataGrid}}, Path=DataContext.StsCommand}"
+            CommandParameter="{Binding IdPlayer}"/>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                </DataGrid.Columns>
+            </DataGrid>
+            
+            <!-- user home table -->
+            <DataGrid Visibility="{Binding HomeTableUserVisibility, Mode=TwoWay}" IsReadOnly="True" BorderBrush="Transparent" Foreground="Black" Background="Transparent" RowBackground="Transparent" ItemsSource="{Binding PlayersHome,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" CanUserAddRows="false" AutoGenerateColumns="False" HeadersVisibility="Column" CanUserResizeRows="False" Margin="15,0,290,49" >
+                <DataGrid.Resources>
+                    <Style TargetType="{x:Type DataGridColumnHeader}">
+                        <Setter Property="Background" Value="#cc8400" />
+
+                    </Style>
+
+                </DataGrid.Resources>
+
+                <DataGrid.Columns>
+
+                    <DataGridTextColumn Width="120" Header="Name" FontWeight="Bold" Binding="{Binding Name}"/>
+                    <DataGridTextColumn Width="40" Header="Pts" Binding="{Binding Pts}"/>
+                    <DataGridTextColumn Width="40" Header="As" Binding="{Binding Assist}"/>
+                    <DataGridTextColumn Width="*" Header="Reb" Binding="{Binding Reb}"/>
+                    
+                </DataGrid.Columns>
+            </DataGrid>
+
+            <!-- admin away table-->
+            <DataGrid Visibility="{Binding AwayTableAdminVisibility, Mode=TwoWay}" IsReadOnly="True" BorderBrush="Transparent" Foreground="Black" Background="Transparent" RowBackground="Transparent" ItemsSource="{Binding Players,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" CanUserAddRows="false" AutoGenerateColumns="False" HeadersVisibility="Column" CanUserResizeRows="False" Margin="295,0,10,49" >
+                <DataGrid.Resources>
+                    <Style TargetType="{x:Type DataGridColumnHeader}">
+                        <Setter Property="Background" Value="#cc8400" />
+
+                    </Style>
+
+                </DataGrid.Resources>
+
+                <DataGrid.Columns>
+
+                    <DataGridTextColumn Width="120" Header="Name" FontWeight="Bold" Binding="{Binding Name}"/>
+                    <DataGridTextColumn Width="30" Header="Pts" Binding="{Binding Pts}"/>
+                    <DataGridTextColumn Width="30" Header="As" Binding="{Binding Assist}"/>
+                    <DataGridTextColumn Width="30" Header="Reb" Binding="{Binding Reb}"/>
+                    <DataGridTemplateColumn Header="Command" Width="*">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Button Name="DeleteBatch"  Width="50"
+            Content="Detail"
+            Command="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type DataGrid}}, Path=DataContext.StsCommand}"
+            CommandParameter="{Binding IdPlayer}"/>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                </DataGrid.Columns>
+            </DataGrid>
+            
+            <!-- user away table-->
+            <DataGrid Visibility="{Binding AwayTableUserVisibility, Mode=TwoWay}" IsReadOnly="True" BorderBrush="Transparent" Foreground="Black" Background="Transparent" RowBackground="Transparent" ItemsSource="{Binding Players,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" CanUserAddRows="false" AutoGenerateColumns="False" HeadersVisibility="Column" CanUserResizeRows="False" Margin="295,0,10,49" >
+                <DataGrid.Resources>
+                    <Style TargetType="{x:Type DataGridColumnHeader}">
+                        <Setter Property="Background" Value="#cc8400" />
+
+                    </Style>
+
+                </DataGrid.Resources>
+
+                <DataGrid.Columns>
+
+                    <DataGridTextColumn Width="120" Header="Name" FontWeight="Bold" Binding="{Binding Name}"/>
+                    <DataGridTextColumn Width="40" Header="Pts" Binding="{Binding Pts}"/>
+                    <DataGridTextColumn Width="40" Header="As" Binding="{Binding Assist}"/>
+                    <DataGridTextColumn Width="*" Header="Reb" Binding="{Binding Reb}"/>
+                 
+                </DataGrid.Columns>
+            </DataGrid>
+
+        </Grid>
+        <Button Visibility="{Binding AddRemoveFromHomeTeamVisibility, Mode=TwoWay}" Content="Add/remove&#x0a;players from &#x0a;home team" Command="{Binding AddRemovePlayerPlay}"  CommandParameter="{Binding IdTeam1}" HorizontalAlignment="Left" Margin="5,45,0,0" VerticalAlignment="Top" Height="50" Width="75">
+            
+        </Button>
+
+        <Button Visibility="{Binding AddRemoveFromAwayTeamVisibility, Mode=TwoWay}" Content="Add/remove&#x0a;players from &#x0a; away team" Command="{Binding AddRemovePlayerPlay}" CommandParameter="{Binding IdTeam2}"  HorizontalAlignment="Left" Margin="665,45,0,0" VerticalAlignment="Top" Height="50" Width="75">
+           
+        </Button>
+
+    </Grid>
+</Window>

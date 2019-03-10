@@ -1,0 +1,8 @@
+CREATE TABLE Nalog 
+    (
+     IME_NLG VARCHAR (64) NOT NULL , 
+     SFR_NLG VARCHAR (64) NOT NULL , 
+     ULOGA_NLG VARCHAR (64) NOT NULL 
+    )
+    ON "default"
+GO

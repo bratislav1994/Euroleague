@@ -1,0 +1,6 @@
+ALTER TABLE Sudija ADD CONSTRAINT Sudija_PK PRIMARY KEY CLUSTERED (LICBR_SUD)
+     WITH (
+     ALLOW_PAGE_LOCKS = ON , 
+     ALLOW_ROW_LOCKS = ON )
+     ON "default" 
+    GO

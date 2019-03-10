@@ -1,0 +1,30 @@
+﻿** Highlights
+     Tables that will be rebuilt
+       None
+     Clustered indexes that will be dropped
+       None
+     Clustered indexes that will be created
+       None
+     Possible data issues
+       None
+
+** User actions
+     Drop
+       [dbo].[Igrac_Klub_FK] (Foreign Key)
+       [dbo].[IgracIgra_Igrac_FK] (Foreign Key)
+       [dbo].[IgracIgra_StatistickiPodaci_FK] (Foreign Key)
+       [dbo].[IgracIgra_Utakmica_FK] (Foreign Key)
+       [dbo].[Klub_Evroliga_FK] (Foreign Key)
+       [dbo].[Radnik_Hala_FK] (Foreign Key)
+       [dbo].[Rezervacija_Hala_FK] (Foreign Key)
+       [dbo].[Rezervacija_Klub_FK] (Foreign Key)
+       [dbo].[Sudi_Sudija_FK] (Foreign Key)
+       [dbo].[Sudi_Utakmica_FK] (Foreign Key)
+       [dbo].[Sudija_Evroliga_FK] (Foreign Key)
+       [dbo].[Trener_Klub_FK] (Foreign Key)
+       [dbo].[Utakmica_Evroliga_FK] (Foreign Key)
+       [dbo].[Utakmica_Klub_FK] (Foreign Key)
+       [dbo].[Utakmica_Klub_FKv2] (Foreign Key)
+       [dbo].[Utakmica_KonferencijaZaMedije_FK] (Foreign Key)
+
+** Supporting actions

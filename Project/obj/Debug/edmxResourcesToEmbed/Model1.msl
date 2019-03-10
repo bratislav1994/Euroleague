@@ -1,0 +1,131 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="Euroleague3ModelStoreContainer" CdmEntityContainer="EuroleagueEntities3">
+    <EntitySetMapping Name="Evroligas">
+      <EntityTypeMapping TypeName="Euroleague3Model.Evroliga">
+        <MappingFragment StoreEntitySet="Evroliga">
+          <ScalarProperty Name="OZN_LIG" ColumnName="OZN_LIG" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Halas">
+      <EntityTypeMapping TypeName="Euroleague3Model.Hala">
+        <MappingFragment StoreEntitySet="Hala">
+          <ScalarProperty Name="OZN_HALA" ColumnName="OZN_HALA" />
+          <ScalarProperty Name="NAZ_HALA" ColumnName="NAZ_HALA" />
+          <ScalarProperty Name="DRZ_HALA" ColumnName="DRZ_HALA" />
+          <ScalarProperty Name="GRD_HALA" ColumnName="GRD_HALA" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Igracs">
+      <EntityTypeMapping TypeName="Euroleague3Model.Igrac">
+        <MappingFragment StoreEntitySet="Igrac">
+          <ScalarProperty Name="LICBR_IGR" ColumnName="LICBR_IGR" />
+          <ScalarProperty Name="IME_IGR" ColumnName="IME_IGR" />
+          <ScalarProperty Name="PRZ_IGR" ColumnName="PRZ_IGR" />
+          <ScalarProperty Name="PDATUG_IGR" ColumnName="PDATUG_IGR" />
+          <ScalarProperty Name="KDATUG_IGR" ColumnName="KDATUG_IGR" />
+          <ScalarProperty Name="POZ_IGR" ColumnName="POZ_IGR" />
+          <ScalarProperty Name="VIS_IGR" ColumnName="VIS_IGR" />
+          <ScalarProperty Name="SLIKA_IGR" ColumnName="SLIKA_IGR" />
+          <ScalarProperty Name="Klub_ID_KLB" ColumnName="Klub_ID_KLB" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="IgracIgras">
+      <EntityTypeMapping TypeName="Euroleague3Model.IgracIgra">
+        <MappingFragment StoreEntitySet="IgracIgra">
+          <ScalarProperty Name="POENI_IGRACIGRA" ColumnName="POENI_IGRACIGRA" />
+          <ScalarProperty Name="AS_IGRACIGRA" ColumnName="AS_IGRACIGRA" />
+          <ScalarProperty Name="SK_IGRACIGRA" ColumnName="SK_IGRACIGRA" />
+          <ScalarProperty Name="Utakmica_OZN_UTK" ColumnName="Utakmica_OZN_UTK" />
+          <ScalarProperty Name="Igrac_LICBR_IGR" ColumnName="Igrac_LICBR_IGR" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Klubs">
+      <EntityTypeMapping TypeName="Euroleague3Model.Klub">
+        <MappingFragment StoreEntitySet="Klub">
+          <ScalarProperty Name="ID_KLB" ColumnName="ID_KLB" />
+          <ScalarProperty Name="NAZ_KLB" ColumnName="NAZ_KLB" />
+          <ScalarProperty Name="DRZ_KLB" ColumnName="DRZ_KLB" />
+          <ScalarProperty Name="GRD_KLB" ColumnName="GRD_KLB" />
+          <ScalarProperty Name="POB_KLB" ColumnName="POB_KLB" />
+          <ScalarProperty Name="POR_KLB" ColumnName="POR_KLB" />
+          <ScalarProperty Name="KOSRAZ_KLB" ColumnName="KOSRAZ_KLB" />
+          <ScalarProperty Name="Evroliga_OZN_LIG" ColumnName="Evroliga_OZN_LIG" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Nalogs">
+      <EntityTypeMapping TypeName="Euroleague3Model.Nalog">
+        <MappingFragment StoreEntitySet="Nalog">
+          <ScalarProperty Name="IME_NLG" ColumnName="IME_NLG" />
+          <ScalarProperty Name="SFR_NLG" ColumnName="SFR_NLG" />
+          <ScalarProperty Name="ULOGA_NLG" ColumnName="ULOGA_NLG" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Rezervacijas">
+      <EntityTypeMapping TypeName="Euroleague3Model.Rezervacija">
+        <MappingFragment StoreEntitySet="Rezervacija">
+          <ScalarProperty Name="Klub_ID_KLB" ColumnName="Klub_ID_KLB" />
+          <ScalarProperty Name="Hala_OZN_HALA" ColumnName="Hala_OZN_HALA" />
+          <ScalarProperty Name="PVRMREZ_HALA" ColumnName="PVRMREZ_HALA" />
+          <ScalarProperty Name="KVRMREZ_HALA" ColumnName="KVRMREZ_HALA" />
+          <ScalarProperty Name="SFR_REZ" ColumnName="SFR_REZ" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Sudis">
+      <EntityTypeMapping TypeName="Euroleague3Model.Sudi">
+        <MappingFragment StoreEntitySet="Sudi">
+          <ScalarProperty Name="Sudija_LICBR_SUD" ColumnName="Sudija_LICBR_SUD" />
+          <ScalarProperty Name="Utakmica_OZN_UTK" ColumnName="Utakmica_OZN_UTK" />
+          <ScalarProperty Name="ID_SUDI" ColumnName="ID_SUDI" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Sudijas">
+      <EntityTypeMapping TypeName="Euroleague3Model.Sudija">
+        <MappingFragment StoreEntitySet="Sudija">
+          <ScalarProperty Name="LICBR_SUD" ColumnName="LICBR_SUD" />
+          <ScalarProperty Name="IME_SUD" ColumnName="IME_SUD" />
+          <ScalarProperty Name="PRZ_SUD" ColumnName="PRZ_SUD" />
+          <ScalarProperty Name="DRZ_SUD" ColumnName="DRZ_SUD" />
+          <ScalarProperty Name="Evroliga_OZN_LIG" ColumnName="Evroliga_OZN_LIG" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Treners">
+      <EntityTypeMapping TypeName="Euroleague3Model.Trener">
+        <MappingFragment StoreEntitySet="Trener">
+          <ScalarProperty Name="LICBR_TRN" ColumnName="LICBR_TRN" />
+          <ScalarProperty Name="IME_TRN" ColumnName="IME_TRN" />
+          <ScalarProperty Name="PRZ_TRN" ColumnName="PRZ_TRN" />
+          <ScalarProperty Name="PDATUG_TRN" ColumnName="PDATUG_TRN" />
+          <ScalarProperty Name="KDATUG_TRN" ColumnName="KDATUG_TRN" />
+          <ScalarProperty Name="Klub_ID_KLB" ColumnName="Klub_ID_KLB" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Utakmicas">
+      <EntityTypeMapping TypeName="Euroleague3Model.Utakmica">
+        <MappingFragment StoreEntitySet="Utakmica">
+          <ScalarProperty Name="OZN_UTK" ColumnName="OZN_UTK" />
+          <ScalarProperty Name="RBRKOLA_UTK" ColumnName="RBRKOLA_UTK" />
+          <ScalarProperty Name="DOMPOENI_UTK" ColumnName="DOMPOENI_UTK" />
+          <ScalarProperty Name="GOSTPOENI_UTK" ColumnName="GOSTPOENI_UTK" />
+          <ScalarProperty Name="KONFMDJ_UTK" ColumnName="KONFMDJ_UTK" />
+          <ScalarProperty Name="Evroliga_OZN_LIG" ColumnName="Evroliga_OZN_LIG" />
+          <ScalarProperty Name="Klub_ID_KLB1" ColumnName="Klub_ID_KLB1" />
+          <ScalarProperty Name="Klub_ID_KLB" ColumnName="Klub_ID_KLB" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="DateValidationReservation" FunctionName="Euroleague3Model.Store.DateValidationReservation" />
+    <FunctionImportMapping FunctionImportName="DateValidationReservationModify" FunctionName="Euroleague3Model.Store.DateValidationReservationModify" />
+    <FunctionImportMapping FunctionImportName="Stats" FunctionName="Euroleague3Model.Store.Stats" />
+  </EntityContainerMapping>
+</Mapping>

@@ -1,0 +1,10 @@
+CREATE TABLE Sudija 
+    (
+     LICBR_SUD VARCHAR (64) NOT NULL , 
+     IME_SUD VARCHAR (64) NOT NULL , 
+     PRZ_SUD VARCHAR (64) NOT NULL , 
+     DRZ_SUD VARCHAR (64) NOT NULL , 
+     Evroliga_OZN_LIG VARCHAR (64) NOT NULL 
+    )
+    ON "default"
+GO

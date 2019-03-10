@@ -1,0 +1,154 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Euroleague3Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Evroliga">
+    <Key>
+      <PropertyRef Name="OZN_LIG" />
+    </Key>
+    <Property Name="OZN_LIG" Type="varchar" MaxLength="64" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Hala">
+    <Key>
+      <PropertyRef Name="OZN_HALA" />
+    </Key>
+    <Property Name="OZN_HALA" Type="varchar" MaxLength="64" Nullable="false" />
+    <Property Name="NAZ_HALA" Type="varchar" MaxLength="64" Nullable="false" />
+    <Property Name="DRZ_HALA" Type="varchar" MaxLength="64" Nullable="false" />
+    <Property Name="GRD_HALA" Type="varchar" MaxLength="64" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Igrac">
+    <Key>
+      <PropertyRef Name="LICBR_IGR" />
+    </Key>
+    <Property Name="LICBR_IGR" Type="varchar" MaxLength="64" Nullable="false" />
+    <Property Name="IME_IGR" Type="varchar" MaxLength="64" Nullable="false" />
+    <Property Name="PRZ_IGR" Type="varchar" MaxLength="64" Nullable="false" />
+    <Property Name="PDATUG_IGR" Type="date" Nullable="false" />
+    <Property Name="KDATUG_IGR" Type="date" Nullable="false" />
+    <Property Name="POZ_IGR" Type="varchar" MaxLength="64" Nullable="false" />
+    <Property Name="VIS_IGR" Type="real" Nullable="false" />
+    <Property Name="SLIKA_IGR" Type="varbinary(max)" />
+    <Property Name="Klub_ID_KLB" Type="varchar" MaxLength="64" Nullable="false" />
+  </EntityType>
+  <EntityType Name="IgracIgra">
+    <Key>
+      <PropertyRef Name="Utakmica_OZN_UTK" />
+      <PropertyRef Name="Igrac_LICBR_IGR" />
+    </Key>
+    <Property Name="POENI_IGRACIGRA" Type="int" Nullable="false" />
+    <Property Name="AS_IGRACIGRA" Type="int" Nullable="false" />
+    <Property Name="SK_IGRACIGRA" Type="int" Nullable="false" />
+    <Property Name="Utakmica_OZN_UTK" Type="varchar" MaxLength="64" Nullable="false" />
+    <Property Name="Igrac_LICBR_IGR" Type="varchar" MaxLength="64" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Klub">
+    <Key>
+      <PropertyRef Name="ID_KLB" />
+    </Key>
+    <Property Name="ID_KLB" Type="varchar" MaxLength="64" Nullable="false" />
+    <Property Name="NAZ_KLB" Type="varchar" MaxLength="64" Nullable="false" />
+    <Property Name="DRZ_KLB" Type="varchar" MaxLength="64" Nullable="false" />
+    <Property Name="GRD_KLB" Type="varchar" MaxLength="64" Nullable="false" />
+    <Property Name="POB_KLB" Type="int" Nullable="false" />
+    <Property Name="POR_KLB" Type="int" Nullable="false" />
+    <Property Name="KOSRAZ_KLB" Type="int" Nullable="false" />
+    <Property Name="Evroliga_OZN_LIG" Type="varchar" MaxLength="64" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Nalog">
+    <Key>
+      <PropertyRef Name="IME_NLG" />
+    </Key>
+    <Property Name="IME_NLG" Type="varchar" MaxLength="64" Nullable="false" />
+    <Property Name="SFR_NLG" Type="varchar" MaxLength="64" Nullable="false" />
+    <Property Name="ULOGA_NLG" Type="varchar" MaxLength="64" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Rezervacija">
+    <Key>
+      <PropertyRef Name="Klub_ID_KLB" />
+      <PropertyRef Name="Hala_OZN_HALA" />
+      <PropertyRef Name="SFR_REZ" />
+    </Key>
+    <Property Name="Klub_ID_KLB" Type="varchar" MaxLength="64" Nullable="false" />
+    <Property Name="Hala_OZN_HALA" Type="varchar" MaxLength="64" Nullable="false" />
+    <Property Name="PVRMREZ_HALA" Type="date" Nullable="false" />
+    <Property Name="KVRMREZ_HALA" Type="date" Nullable="false" />
+    <Property Name="SFR_REZ" Type="varchar" MaxLength="64" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Sudi">
+    <Key>
+      <PropertyRef Name="Sudija_LICBR_SUD" />
+      <PropertyRef Name="Utakmica_OZN_UTK" />
+      <PropertyRef Name="ID_SUDI" />
+    </Key>
+    <Property Name="Sudija_LICBR_SUD" Type="varchar" MaxLength="64" Nullable="false" />
+    <Property Name="Utakmica_OZN_UTK" Type="varchar" MaxLength="64" Nullable="false" />
+    <Property Name="ID_SUDI" Type="varchar" MaxLength="64" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Sudija">
+    <Key>
+      <PropertyRef Name="LICBR_SUD" />
+    </Key>
+    <Property Name="LICBR_SUD" Type="varchar" MaxLength="64" Nullable="false" />
+    <Property Name="IME_SUD" Type="varchar" MaxLength="64" Nullable="false" />
+    <Property Name="PRZ_SUD" Type="varchar" MaxLength="64" Nullable="false" />
+    <Property Name="DRZ_SUD" Type="varchar" MaxLength="64" Nullable="false" />
+    <Property Name="Evroliga_OZN_LIG" Type="varchar" MaxLength="64" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Trener">
+    <Key>
+      <PropertyRef Name="LICBR_TRN" />
+    </Key>
+    <Property Name="LICBR_TRN" Type="varchar" MaxLength="64" Nullable="false" />
+    <Property Name="IME_TRN" Type="varchar" MaxLength="64" Nullable="false" />
+    <Property Name="PRZ_TRN" Type="varchar" MaxLength="64" Nullable="false" />
+    <Property Name="PDATUG_TRN" Type="date" Nullable="false" />
+    <Property Name="KDATUG_TRN" Type="date" Nullable="false" />
+    <Property Name="Klub_ID_KLB" Type="varchar" MaxLength="64" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Utakmica">
+    <Key>
+      <PropertyRef Name="OZN_UTK" />
+    </Key>
+    <Property Name="OZN_UTK" Type="varchar" MaxLength="64" Nullable="false" />
+    <Property Name="RBRKOLA_UTK" Type="int" Nullable="false" />
+    <Property Name="DOMPOENI_UTK" Type="int" />
+    <Property Name="GOSTPOENI_UTK" Type="int" />
+    <Property Name="KONFMDJ_UTK" Type="bit" Nullable="false" />
+    <Property Name="Evroliga_OZN_LIG" Type="varchar" MaxLength="64" Nullable="false" />
+    <Property Name="Klub_ID_KLB1" Type="varchar" MaxLength="64" Nullable="false" />
+    <Property Name="Klub_ID_KLB" Type="varchar" MaxLength="64" Nullable="false" />
+  </EntityType>
+  <Function Name="DateValidationReservation" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="startDate" Type="date" Mode="In" />
+    <Parameter Name="endDate" Type="date" Mode="In" />
+    <Parameter Name="hallId" Type="varchar" Mode="In" />
+    <Parameter Name="isOk" Type="varchar" Mode="InOut" />
+  </Function>
+  <Function Name="DateValidationReservationModify" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="startDate" Type="date" Mode="In" />
+    <Parameter Name="endDate" Type="date" Mode="In" />
+    <Parameter Name="oldRezId" Type="varchar" Mode="In" />
+    <Parameter Name="oldHalaOzn" Type="varchar" Mode="In" />
+    <Parameter Name="isOk" Type="varchar" Mode="InOut" />
+  </Function>
+  <Function Name="Stats" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="playerId" Type="varchar" Mode="In" />
+    <Parameter Name="name" Type="varchar" Mode="InOut" />
+    <Parameter Name="games" Type="int" Mode="InOut" />
+    <Parameter Name="pts" Type="float" Mode="InOut" />
+    <Parameter Name="as" Type="float" Mode="InOut" />
+    <Parameter Name="reb" Type="float" Mode="InOut" />
+  </Function>
+  <EntityContainer Name="Euroleague3ModelStoreContainer">
+    <EntitySet Name="Evroliga" EntityType="Self.Evroliga" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Hala" EntityType="Self.Hala" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Igrac" EntityType="Self.Igrac" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="IgracIgra" EntityType="Self.IgracIgra" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Klub" EntityType="Self.Klub" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Nalog" EntityType="Self.Nalog" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Rezervacija" EntityType="Self.Rezervacija" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Sudi" EntityType="Self.Sudi" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Sudija" EntityType="Self.Sudija" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Trener" EntityType="Self.Trener" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Utakmica" EntityType="Self.Utakmica" Schema="dbo" store:Type="Tables" />
+  </EntityContainer>
+</Schema>

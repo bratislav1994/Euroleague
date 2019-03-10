@@ -1,0 +1,1975 @@
+﻿<Window x:Class="Project.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+        xmlns:local="clr-namespace:Project"
+        xmlns:System="clr-namespace:System;assembly=mscorlib"
+        xmlns:ExpandableHeader="clr-namespace:Project.Filter"
+        mc:Ignorable="d"
+        Title="Euroleague basketball" Height="610" Width="840" ResizeMode="CanMinimize">
+    <Window.Resources>
+        <Style x:Key="LVStyle" TargetType="{x:Type GridViewColumnHeader}">
+            <Setter Property="Visibility" Value="Collapsed" />
+        </Style>
+
+        <Style TargetType="TabControl">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="TabControl">
+                        <Grid>
+
+                            <StackPanel HorizontalAlignment="Left" IsItemsHost="True" Width="128" Margin="0,20,0,0" />
+                            <ContentPresenter ContentSource="SelectedContent" Margin="170,-60,5,5" />
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style TargetType="TabItem">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="TabItem">
+                        <Grid HorizontalAlignment="Left" Name="grid" Height="25" Width="90" Margin="22,1, 0, 0">
+                            <Border Name="border" SnapsToDevicePixels="True" BorderThickness="1" BorderBrush="Black" Background="White" />
+                            <ContentPresenter HorizontalAlignment="Left" Content="{TemplateBinding Header}" Margin="2" />
+                        </Grid>
+
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsSelected" Value="True">
+                                <Setter TargetName="grid" Property="Width" Value="100" />
+                                <Setter TargetName="border" Property="Background" Value="#cc8400" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+    </Window.Resources>
+    <Grid>
+
+        <Grid.Resources>
+            <ExpandableHeader:ActivityToBrushConverter x:Key="activityToBrushConverter"/>
+
+            <Style TargetType="{x:Type TextBox}">
+                <Setter Property="VerticalAlignment" Value="Center" />
+                <Setter Property="Margin" Value="0,2,40,2" />
+                <Setter Property="Validation.ErrorTemplate">
+                    <Setter.Value>
+                        <ControlTemplate>
+                            <DockPanel LastChildFill="true">
+                                <Border Background="Red" DockPanel.Dock="right" Margin="5,0,0,0" Width="20" Height="20" CornerRadius="10"
+                                    ToolTip="{Binding ElementName=customAdorner, Path=AdornedElement.(Validation.Errors)[0].ErrorContent}">
+                                    <TextBlock Text="!" VerticalAlignment="center" HorizontalAlignment="center" FontWeight="Bold" Foreground="white">
+                                    </TextBlock>
+                                </Border>
+                                <AdornedElementPlaceholder Name="customAdorner" VerticalAlignment="Center" >
+                                    <Border BorderBrush="red" BorderThickness="1" />
+                                </AdornedElementPlaceholder>
+                                <!--<AdornedElementPlaceholder x:Name="textBox"/>
+                                <TextBlock Text="{Binding [0].ErrorContent}" Foreground="Red"/>-->
+                            </DockPanel>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+
+            <Style TargetType="{x:Type ComboBox}">
+                <Setter Property="VerticalAlignment" Value="Center" />
+                <Setter Property="Margin" Value="0,2,40,2" />
+                <Setter Property="Validation.ErrorTemplate">
+                    <Setter.Value>
+                        <ControlTemplate>
+                            <DockPanel LastChildFill="true">
+                                <Border Background="Red" DockPanel.Dock="right" Margin="5,0,0,0" Width="20" Height="20" CornerRadius="10"
+                                    ToolTip="{Binding ElementName=customAdorner, Path=AdornedElement.(Validation.Errors)[0].ErrorContent}">
+                                    <TextBlock Text="!" VerticalAlignment="center" HorizontalAlignment="center" FontWeight="Bold" Foreground="white">
+                                    </TextBlock>
+                                </Border>
+                                <AdornedElementPlaceholder Name="customAdorner" VerticalAlignment="Center" >
+                                    <Border BorderBrush="red" BorderThickness="1" />
+                                </AdornedElementPlaceholder>
+                                <!--<AdornedElementPlaceholder x:Name="textBox"/>
+                                <TextBlock Text="{Binding [0].ErrorContent}" Foreground="Red"/>-->
+                            </DockPanel>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+
+            <Style TargetType="{x:Type DatePicker}">
+                <Setter Property="VerticalAlignment" Value="Center" />
+                <Setter Property="Margin" Value="0,2,40,2" />
+                <Setter Property="Validation.ErrorTemplate">
+                    <Setter.Value>
+                        <ControlTemplate>
+                            <DockPanel LastChildFill="true">
+                                <Border Background="Red" DockPanel.Dock="right" Margin="5,0,0,0" Width="20" Height="20" CornerRadius="10"
+                                    ToolTip="{Binding ElementName=customAdorner, Path=AdornedElement.(Validation.Errors)[0].ErrorContent}">
+                                    <TextBlock Text="!" VerticalAlignment="center" HorizontalAlignment="center" FontWeight="Bold" Foreground="white">
+                                    </TextBlock>
+                                </Border>
+                                <AdornedElementPlaceholder Name="customAdorner" VerticalAlignment="Center" >
+                                    <Border BorderBrush="red" BorderThickness="1" />
+                                </AdornedElementPlaceholder>
+                                <!--<AdornedElementPlaceholder x:Name="textBox"/>
+                                <TextBlock Text="{Binding [0].ErrorContent}" Foreground="Red"/>-->
+                            </DockPanel>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+
+        </Grid.Resources>
+
+        <Grid.Background>
+            <ImageBrush ImageSource="/Project;component/Images/background.png" />
+        </Grid.Background>
+
+        <TabControl BorderBrush="Transparent" Margin="0, 220, 0, 0" TabStripPlacement="Left" Background="Transparent">
+
+
+
+
+            <TabItem Header="Standings" >
+
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="PreviewMouseLeftButtonDown">
+                        <i:InvokeCommandAction Command="{Binding StandingsVM.ClickStandingsCommand}"/>
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+
+                <Grid Background="Transparent" Margin="7,71,0,0">
+
+                    <DataGrid GridLinesVisibility="None" BorderBrush="Transparent" Foreground="White" Background="Transparent" RowBackground="Transparent" ItemsSource="{Binding StandingsVM.Client.Tables,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" IsReadOnly="True" CanUserAddRows="false" AutoGenerateColumns="False" HeadersVisibility="Column" VerticalScrollBarVisibility="Disabled" CanUserResizeRows="False" Margin="0,0,0,19" >
+                        <!--SelectedItem="{Binding EditRemoveWindowVM.SelectedItem}"-->
+                        <DataGrid.Resources>
+                            <Style TargetType="{x:Type DataGridColumnHeader}">
+                                <Setter Property="Background" Value="Orange" />
+                            </Style>
+                        </DataGrid.Resources>
+                        <DataGrid.Columns>
+
+                            <DataGridTextColumn Width="40" Header="#" Binding="{Binding Number}"/>
+                            <DataGridTextColumn Width="150" Header="Team" Binding="{Binding ClubName}"/>
+                            <DataGridTextColumn Width="40" Header="W" Binding="{Binding WinNumber}"/>
+                            <DataGridTextColumn Width="40" Header="L" Binding="{Binding LossNumber}"/>
+                            <DataGridTextColumn Width="40" Header="+/-" Binding="{Binding Diff}"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </Grid>
+            </TabItem>
+            <!-- -->
+            <TabItem Header="Schedule">
+
+                <Grid Background="Transparent" Margin="-20,71,0,0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="395*"/>
+                        <ColumnDefinition Width="282*"/>
+                    </Grid.ColumnDefinitions>
+
+
+                    <!--<ComboBox HorizontalAlignment="Left" Margin="3,-28,0,0" VerticalAlignment="Top" SelectedItem="{Binding ScheduleVM.Client.RoundCmb}" ItemsSource="{Binding ScheduleVM.Client.Rounds, UpdateSourceTrigger=PropertyChanged}" Width="100"/>-->
+                    <ComboBox Margin="30,-55,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" SelectedIndex="{Binding ScheduleVM.RoundCmb}" ItemsSource="{Binding ScheduleVM.Model.Rounds, UpdateSourceTrigger=PropertyChanged}" Height="22" Width="100" >
+
+                    </ComboBox>
+
+                    <Button Content="Boxscore" Command="{Binding ScheduleVM.ShowDetail}" Height="40" Width="70" Margin="135, -65, 0, 0" HorizontalAlignment="Left" VerticalAlignment="Top" >
+                        <Button.Style>
+                            <Style TargetType="{x:Type Button}">
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Opacity" Value="0.30" />
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Button.Style>
+                    </Button>
+
+                    <Button Visibility="{Binding ScheduleVM.ChangeResultVisibility, Mode=TwoWay}" Content="The result" Command="{Binding ScheduleVM.ClickChangeResultCommand}" Margin="210,-65,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Height="40" Width="70">
+                        <Button.Style>
+                            <Style TargetType="{x:Type Button}">
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Opacity" Value="0.30" />
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Button.Style>
+                    </Button>
+
+                    <Button Visibility="{Binding ScheduleVM.ClickAddRefereesVisibility, Mode=TwoWay}" Content="Referees" Command="{Binding ScheduleVM.ClickAddRefereesCommand}" HorizontalAlignment="Left" Margin="285,-65,0,0" VerticalAlignment="Top" Height="40" Width="70">
+                        <Button.Style>
+                            <Style TargetType="{x:Type Button}">
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Opacity" Value="0.30" />
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Button.Style>
+                    </Button>
+
+                    <Button Visibility="{Binding ScheduleVM.ClickAddReservationVisibility, Mode=TwoWay}" Content="Reservation" Command="{Binding ScheduleVM.ClickAddReservationCommand}" HorizontalAlignment="Left" Margin="360,-65,0,0" VerticalAlignment="Top" Height="40" Width="70" Grid.ColumnSpan="2">
+                        <Button.Style>
+                            <Style TargetType="{x:Type Button}">
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Opacity" Value="0.30" />
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Button.Style>
+                    </Button>
+
+                    <Border Grid.ColumnSpan="2">
+
+                    </Border>
+                    <TextBlock Foreground="White" Visibility="{Binding ScheduleVM.LabelVisibility, Mode=TwoWay}" Text="Conference:" Width="80" Margin="42,-55,161,359" Grid.Column="1"/>
+                    <CheckBox IsEnabled="{Binding ScheduleVM.ChBoxEnabled}" Visibility="{Binding ScheduleVM.ConferenceVisibility, Mode=TwoWay}" IsChecked="{Binding ScheduleVM.Conference, Mode=TwoWay}" HorizontalAlignment="Left" Margin="110,-54,0,0" VerticalAlignment="Top" Grid.Column="1" Height="15" Width="16">
+                    </CheckBox>
+
+
+                    <DataGrid SelectionMode="Single" GridLinesVisibility="None" BorderBrush="Transparent" Foreground="White" Background="Transparent" RowBackground="Transparent" ItemsSource="{Binding ScheduleVM.Model.Schedules,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding ScheduleVM.SelectedGame}" IsReadOnly="True" CanUserAddRows="false" AutoGenerateColumns="False" HeadersVisibility="Column" CanUserResizeRows="False" Margin="0,0,0,21" Grid.ColumnSpan="2" >
+                        <DataGrid.Resources>
+                            <Style TargetType="{x:Type DataGridColumnHeader}">
+                                <Setter Property="Background" Value="Orange" />
+                            </Style>
+                        </DataGrid.Resources>
+
+                        <DataGrid.Columns>
+
+                            <DataGridTextColumn Width="100" Header="Home team" Binding="{Binding Team1}"/>
+                            <DataGridTextColumn Width="40" Header="" Binding="{Binding PointsTeam1}"/>
+                            <DataGridTextColumn Width="40" Header="" Binding="{Binding PointsTeam2}"/>
+                            <DataGridTextColumn Width="100" Header="Away team" Binding="{Binding Team2}"/>
+
+                        </DataGrid.Columns>
+                    </DataGrid>
+                    <TextBox Visibility="{Binding ScheduleVM.TxbVisibility, Mode=TwoWay}" Text ="{Binding ScheduleVM.RefereesAndReservations, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Background="#cc8400" Grid.Column="1" HorizontalAlignment="Left" Height="140" Margin="132,18,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="148"/>
+                </Grid>
+
+            </TabItem>
+            <TabItem Header="Roster" >
+
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="PreviewMouseLeftButtonDown">
+                        <i:InvokeCommandAction Command="{Binding RosterVM.ClickRosterCommand}"/>
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+
+                <Grid Margin="0,0,0,21">
+                    <Canvas>
+                        <!--<ComboBox Margin="10,10,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" SelectedItem="{Binding RosterVM.Club}" ItemsSource="{Binding RosterVM.Model.Clubs, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Height="22" Width="100" 
+                            IsTextSearchEnabled="True" IsEditable="True" StaysOpenOnEdit="True"
+                                  TextSearch.TextPath="NAZ_KLB"  >
+                            <ComboBox.ItemTemplate>
+                                <DataTemplate>
+                                    <TextBlock>
+                                        <TextBlock.Text>
+                                            <MultiBinding StringFormat="{}{0}">
+                                                <Binding Path="NAZ_KLB"/>
+                                            </MultiBinding>
+                                        </TextBlock.Text>
+                                    </TextBlock>
+                                </DataTemplate>
+                            </ComboBox.ItemTemplate>
+                        </ComboBox>-->
+                    </Canvas>
+
+                    <Canvas Margin="-26,80,322,8" >
+                        <DataGrid Height="300" Width="356" IsReadOnly="True" SelectionMode="Single" Foreground="White" RowBackground="Transparent" Background="Transparent" ItemsSource="{Binding RosterVM.Players,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding RosterVM.SelPlayer}" CanUserAddRows="false" AutoGenerateColumns="False" HeadersVisibility="Column" CanUserResizeRows="False" >
+                            <DataGrid.Resources>
+
+                                <Style TargetType="{x:Type DataGridColumnHeader}">
+                                    <Setter Property="Foreground" Value="Black" />
+
+                                </Style>
+
+                            </DataGrid.Resources>
+
+                            <DataGrid.Columns>
+
+                                <DataGridTemplateColumn Header="Name" CanUserSort="True" 
+        SortMemberPath="IME_IGR" MinWidth="100" >
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <TextBlock Text="{Binding IME_IGR}" />
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                    <!--NAME COLUMN-->
+                                    <DataGridTemplateColumn.HeaderTemplate>
+                                        <DataTemplate>
+                                            <Grid IsHitTestVisible="True">
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="70"/>
+                                                    <ColumnDefinition Width="30"/>
+                                                </Grid.ColumnDefinitions>
+                                                <TextBlock Grid.Column="0" Text="{TemplateBinding Content}"/>
+                                                <!--FILTER EXPANDER-->
+                                                <Expander Grid.Column="1" IsHitTestVisible="True" 
+                VerticalAlignment="Top" ToolTip="Filter">
+                                                    <Border IsHitTestVisible="True" BorderThickness="1" 
+                  Margin="-70 0 0 0" >
+                                                        <StackPanel Margin="0 4 0 0">
+                                                            <TextBox
+                                                
+                        Text="{Binding DataContext.RosterVM.NameFilter, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay,
+                        RelativeSource={RelativeSource AncestorType=Window}}" 
+                        
+                        ToolTip="Enter filter term" Width="100" Height="18" FontSize="9" 
+                        BorderThickness="1" />
+                                                        </StackPanel>
+                                                    </Border>
+                                                </Expander>
+                                            </Grid>
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.HeaderTemplate>
+
+                                </DataGridTemplateColumn>
+
+                                <DataGridTemplateColumn Header="Surname" CanUserSort="True" 
+        SortMemberPath="PRZ_IGR" MinWidth="100" >
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <TextBlock Text="{Binding PRZ_IGR}" />
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                    <!--NAME COLUMN-->
+                                    <DataGridTemplateColumn.HeaderTemplate>
+                                        <DataTemplate>
+                                            <Grid IsHitTestVisible="True">
+                                                <Grid.RowDefinitions>
+                                                    <RowDefinition/>
+                                                    <RowDefinition/>
+                                                </Grid.RowDefinitions>
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="70"/>
+                                                    <ColumnDefinition Width="30"/>
+                                                </Grid.ColumnDefinitions>
+                                                <TextBlock Grid.Column="0" Text="{TemplateBinding Content}" Grid.RowSpan="2"/>
+                                                <!--FILTER EXPANDER-->
+                                                <Expander Grid.Column="1" IsHitTestVisible="True" 
+                VerticalAlignment="Top" ToolTip="Filter" Grid.RowSpan="2">
+                                                    <Border IsHitTestVisible="True" BorderThickness="1" 
+                  Margin="-70 0 0 0" >
+                                                        <StackPanel Margin="0 4 0 0">
+                                                            <TextBox 
+                                                
+                        Text="{Binding DataContext.RosterVM.SurnameFilter, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay,
+                        RelativeSource={RelativeSource AncestorType=Window}}" 
+                        
+                        ToolTip="Enter filter term" Width="100" Height="18" FontSize="9" 
+                        BorderThickness="1" />
+                                                        </StackPanel>
+                                                    </Border>
+                                                </Expander>
+                                            </Grid>
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.HeaderTemplate>
+
+                                </DataGridTemplateColumn>
+
+                                <DataGridTemplateColumn Header="Club" CanUserSort="True" 
+        SortMemberPath="Klub.NAZ_KLB" MinWidth="100" >
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <TextBlock Text="{Binding Klub.NAZ_KLB}" />
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                    <!--NAME COLUMN-->
+                                    <DataGridTemplateColumn.HeaderTemplate>
+                                        <DataTemplate>
+                                            <Grid IsHitTestVisible="True">
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="70"/>
+                                                    <ColumnDefinition Width="30"/>
+                                                </Grid.ColumnDefinitions>
+                                                <TextBlock Grid.Column="0" Text="{TemplateBinding Content}"/>
+                                                <!--FILTER EXPANDER-->
+                                                <Expander Grid.Column="1" IsHitTestVisible="True" 
+                VerticalAlignment="Top" ToolTip="Filter">
+                                                    <Border IsHitTestVisible="True" BorderThickness="1" 
+                  Margin="-70 0 0 0" >
+                                                        <StackPanel Margin="0 4 0 0">
+                                                            <TextBox
+                                                
+                        Text="{Binding DataContext.RosterVM.ClubFilter, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay,
+                        RelativeSource={RelativeSource AncestorType=Window}}" 
+                        
+                        ToolTip="Enter filter term" Width="100" Height="18" FontSize="9" 
+                        BorderThickness="1" />
+                                                        </StackPanel>
+                                                    </Border>
+                                                </Expander>
+                                            </Grid>
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.HeaderTemplate>
+
+                                </DataGridTemplateColumn>
+
+
+                            </DataGrid.Columns>
+                        </DataGrid>
+                    </Canvas>
+
+                    <Canvas Background="#555555" Visibility="{Binding RosterVM.PlayerCanvasVis, Mode=TwoWay}" Margin="350,80,309,8" Width="262" >
+                        <Image Stretch="Fill" Source="{Binding RosterVM.PlayerImage}" HorizontalAlignment="Left" Height="131" VerticalAlignment="Top" Width="262" OpacityMask="#FF232020"/>
+                        <Rectangle Visibility="{Binding RosterVM.RectangleVis, Mode=TwoWay}" Fill="#FFF4F4F5" HorizontalAlignment="Left" Height="131" Stroke="Black" VerticalAlignment="Top" Width="262"/>
+                        <TextBox Text ="{Binding RosterVM.Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" BorderThickness="0" FontSize="24" Background="Transparent" BorderBrush="Transparent" Foreground="#cc8400" IsEnabled="False" HorizontalAlignment="Left" Height="35" Margin="0,131,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="262" />
+                        <TextBox Text ="{Binding RosterVM.Height, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" BorderThickness="0" FontSize="16" Background="Transparent" BorderBrush="Transparent" Foreground="White" IsEnabled="False" HorizontalAlignment="Left" Height="26" Margin="0,166,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="262" />
+                        <TextBox Text ="{Binding RosterVM.Position, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" BorderThickness="0" FontSize="16" Background="Transparent" BorderBrush="Transparent" Foreground="White" IsEnabled="False" HorizontalAlignment="Left" Height="26" Margin="0,192,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="262" />
+                        <TextBox Text ="{Binding RosterVM.Contract, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" BorderThickness="0" FontSize="16" Background="Transparent" BorderBrush="Transparent" Foreground="White" IsEnabled="False" HorizontalAlignment="Left" Height="26" Margin="0,218,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="262" />
+                    </Canvas>
+
+                </Grid>
+
+            </TabItem>
+
+            <TabItem Header="Games" >
+
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="PreviewMouseLeftButtonDown">
+                        <i:InvokeCommandAction Command="{Binding GamesByClubVM.ClickGamesCommand}"/>
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+
+                <Grid Margin="0,0,0,21">
+                    <Canvas>
+                        <ComboBox Margin="10,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" SelectedItem="{Binding GamesByClubVM.Club}" ItemsSource="{Binding GamesByClubVM.Model.Clubs, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Height="22" Width="100" >
+                            <ComboBox.ItemTemplate>
+                                <DataTemplate>
+                                    <TextBlock>
+                                        <TextBlock.Text>
+                                            <MultiBinding StringFormat="{}{0}&#x0a;{1}">
+                                                <Binding Path="NAZ_KLB"/>
+                                                <Binding Path="GRD_KLB"/>
+                                            </MultiBinding>
+                                        </TextBlock.Text>
+                                    </TextBlock>
+                                </DataTemplate>
+                            </ComboBox.ItemTemplate>
+                        </ComboBox>
+                    </Canvas>
+
+                    <Canvas Margin="-26,80,322,8" >
+                        <DataGrid Height="300" Width="410" IsReadOnly="True" Foreground="#cc8400" RowBackground="Transparent" Background="Transparent" ItemsSource="{Binding GamesByClubVM.Games,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" CanUserAddRows="false" AutoGenerateColumns="False" HeadersVisibility="Column" CanUserResizeRows="False" >
+                            <DataGrid.Resources>
+
+                                <Style TargetType="{x:Type DataGridColumnHeader}">
+                                    <Setter Property="Foreground" Value="Black" />
+
+                                </Style>
+
+                            </DataGrid.Resources>
+
+                            <DataGrid.Columns>
+
+                                <DataGridTemplateColumn Header="#" CanUserSort="True" 
+        SortMemberPath="RBRKOLA_UTK" MinWidth="40" Width="40">
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <TextBlock Text="{Binding RBRKOLA_UTK}" />
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                    <!--NAME COLUMN-->
+                                    <DataGridTemplateColumn.HeaderTemplate>
+                                        <DataTemplate>
+                                            <Grid IsHitTestVisible="True">
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="70"/>
+                                                    <ColumnDefinition Width="30"/>
+                                                </Grid.ColumnDefinitions>
+                                                <TextBlock Grid.Column="0" Text="{TemplateBinding Content}"/>
+
+                                            </Grid>
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.HeaderTemplate>
+
+                                </DataGridTemplateColumn>
+
+                                <DataGridTemplateColumn Header="Home team" CanUserSort="True" 
+        SortMemberPath="Klub.NAZ_KLB" MinWidth="105" Width="105">
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <TextBlock Text="{Binding Klub.NAZ_KLB}" />
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                    <!--NAME COLUMN-->
+                                    <DataGridTemplateColumn.HeaderTemplate>
+                                        <DataTemplate>
+                                            <Grid IsHitTestVisible="True">
+                                                <Grid.RowDefinitions>
+                                                    <RowDefinition/>
+                                                    <RowDefinition/>
+                                                </Grid.RowDefinitions>
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="70"/>
+                                                    <ColumnDefinition Width="30"/>
+                                                </Grid.ColumnDefinitions>
+                                                <TextBlock Grid.Column="0" Text="{TemplateBinding Content}" Grid.RowSpan="2"/>
+                                                <!--FILTER EXPANDER-->
+                                                <Expander Grid.Column="1" IsHitTestVisible="True" 
+                VerticalAlignment="Top" ToolTip="Filter" Grid.RowSpan="2">
+                                                    <Border IsHitTestVisible="True" BorderThickness="1" 
+                  Margin="-70 0 0 0" >
+                                                        <StackPanel Margin="0 4 0 0">
+                                                            <TextBox 
+                                                
+                        Text="{Binding DataContext.GamesByClubVM.ClubFilter, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay,
+                        RelativeSource={RelativeSource AncestorType=Window}}" 
+                        
+                        ToolTip="Enter filter term" Width="100" Height="18" FontSize="9" 
+                        BorderThickness="1" />
+                                                        </StackPanel>
+                                                    </Border>
+                                                </Expander>
+                                            </Grid>
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.HeaderTemplate>
+
+                                </DataGridTemplateColumn>
+
+                                <DataGridTemplateColumn Header="Away team" CanUserSort="True" 
+        SortMemberPath="Klub1.NAZ_KLB" MinWidth="105" Width="105">
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <TextBlock Text="{Binding Klub1.NAZ_KLB}" />
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                    <!--NAME COLUMN-->
+                                    <DataGridTemplateColumn.HeaderTemplate>
+                                        <DataTemplate>
+                                            <Grid IsHitTestVisible="True">
+                                                <Grid.RowDefinitions>
+                                                    <RowDefinition/>
+                                                    <RowDefinition/>
+                                                </Grid.RowDefinitions>
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="70"/>
+                                                    <ColumnDefinition Width="30"/>
+                                                </Grid.ColumnDefinitions>
+                                                <TextBlock Grid.Column="0" Text="{TemplateBinding Content}" Grid.RowSpan="2"/>
+                                                <!--FILTER EXPANDER-->
+                                                <Expander Grid.Column="1" IsHitTestVisible="True" 
+                VerticalAlignment="Top" ToolTip="Filter" Grid.RowSpan="2">
+                                                    <Border IsHitTestVisible="True" BorderThickness="1" 
+                  Margin="-70 0 0 0" >
+                                                        <StackPanel Margin="0 4 0 0">
+                                                            <TextBox 
+                                                
+                        Text="{Binding DataContext.GamesByClubVM.Club1Filter, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay,
+                        RelativeSource={RelativeSource AncestorType=Window}}" 
+                        
+                        ToolTip="Enter filter term" Width="100" Height="18" FontSize="9" 
+                        BorderThickness="1" />
+                                                        </StackPanel>
+                                                    </Border>
+                                                </Expander>
+                                            </Grid>
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.HeaderTemplate>
+
+                                </DataGridTemplateColumn>
+
+                                <DataGridTemplateColumn Header="Home pts" CanUserSort="True" 
+                                MinWidth="70" Width="70">
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <TextBlock Text="{Binding DOMPOENI_UTK}" />
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                    <!--NAME COLUMN-->
+                                    <DataGridTemplateColumn.HeaderTemplate>
+                                        <DataTemplate>
+                                            <Grid IsHitTestVisible="True">
+                                                <Grid.RowDefinitions>
+                                                    <RowDefinition/>
+                                                    <RowDefinition/>
+                                                </Grid.RowDefinitions>
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="70"/>
+                                                    <ColumnDefinition Width="30"/>
+                                                </Grid.ColumnDefinitions>
+                                                <TextBlock Grid.Column="0" Text="{TemplateBinding Content}" Grid.RowSpan="2"/>
+
+                                            </Grid>
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.HeaderTemplate>
+
+                                </DataGridTemplateColumn>
+
+                                <DataGridTemplateColumn Header="Away pts" CanUserSort="True" 
+                                MinWidth="70" Width="70">
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <TextBlock Text="{Binding GOSTPOENI_UTK}" />
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                    <!--NAME COLUMN-->
+                                    <DataGridTemplateColumn.HeaderTemplate>
+                                        <DataTemplate>
+                                            <Grid IsHitTestVisible="True">
+                                                <Grid.RowDefinitions>
+                                                    <RowDefinition/>
+                                                    <RowDefinition/>
+                                                </Grid.RowDefinitions>
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="70"/>
+                                                    <ColumnDefinition Width="30"/>
+                                                </Grid.ColumnDefinitions>
+                                                <TextBlock Grid.Column="0" Text="{TemplateBinding Content}" Grid.RowSpan="2"/>
+
+                                            </Grid>
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.HeaderTemplate>
+
+                                </DataGridTemplateColumn>
+
+                            </DataGrid.Columns>
+                        </DataGrid>
+                    </Canvas>
+
+                </Grid>
+            </TabItem>
+
+            <TabItem Header="Stats" >
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="PreviewMouseLeftButtonDown">
+                        <i:InvokeCommandAction Command="{Binding StatsVM.ClickStatsCommand}"/>
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+
+                <Grid Margin="0,0,0,21">
+                    <Canvas>
+                        <ComboBox Margin="10,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" SelectedItem="{Binding StatsVM.Club}" ItemsSource="{Binding StatsVM.Model.Clubs, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Height="22" Width="100" >
+                            <ComboBox.ItemTemplate>
+                                <DataTemplate>
+                                    <TextBlock>
+                                        <TextBlock.Text>
+                                            <MultiBinding StringFormat="{}{0}&#x0a;{1}">
+                                                <Binding Path="NAZ_KLB"/>
+                                                <Binding Path="GRD_KLB"/>
+                                            </MultiBinding>
+                                        </TextBlock.Text>
+                                    </TextBlock>
+                                </DataTemplate>
+                            </ComboBox.ItemTemplate>
+                        </ComboBox>
+                    </Canvas>
+
+                    <Canvas Margin="-26,80,322,8" >
+                        <DataGrid Height="300" Width="430" IsReadOnly="True" Foreground="#cc8400" RowBackground="Transparent" Background="Transparent" ItemsSource="{Binding StatsVM.Players,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" CanUserAddRows="false" AutoGenerateColumns="False" HeadersVisibility="Column" CanUserResizeRows="False" >
+                            <DataGrid.Resources>
+
+                                <Style TargetType="{x:Type DataGridColumnHeader}">
+                                    <Setter Property="Foreground" Value="Black" />
+
+                                </Style>
+
+                            </DataGrid.Resources>
+
+                            <DataGrid.Columns>
+
+                                <DataGridTemplateColumn Header="Player" CanUserSort="True" 
+        SortMemberPath="Name" MinWidth="140" Width="140">
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <TextBlock Text="{Binding Name}" />
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                    <!--NAME COLUMN-->
+                                    <DataGridTemplateColumn.HeaderTemplate>
+                                        <DataTemplate>
+                                            <Grid IsHitTestVisible="True">
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="70"/>
+                                                    <ColumnDefinition Width="30"/>
+                                                </Grid.ColumnDefinitions>
+                                                <TextBlock Grid.Column="0" Text="{TemplateBinding Content}"/>
+
+                                            </Grid>
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.HeaderTemplate>
+
+                                </DataGridTemplateColumn>
+
+                                <DataGridTemplateColumn Header="Games" CanUserSort="True" 
+        SortMemberPath="Games" MinWidth="100" Width="100">
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <TextBlock Text="{Binding Games}" />
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                    <!--NAME COLUMN-->
+                                    <DataGridTemplateColumn.HeaderTemplate>
+                                        <DataTemplate>
+                                            <Grid IsHitTestVisible="True">
+                                                <Grid.RowDefinitions>
+                                                    <RowDefinition/>
+                                                    <RowDefinition/>
+                                                </Grid.RowDefinitions>
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="70"/>
+                                                    <ColumnDefinition Width="30"/>
+                                                </Grid.ColumnDefinitions>
+                                                <TextBlock Grid.Column="0" Text="{TemplateBinding Content}" Grid.RowSpan="2"/>
+
+                                            </Grid>
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.HeaderTemplate>
+
+                                </DataGridTemplateColumn>
+
+                                <DataGridTemplateColumn Header="Pts" CanUserSort="True" 
+        SortMemberPath="Pts" MinWidth="60" Width="60">
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <TextBlock Text="{Binding Pts}" />
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                    <!--NAME COLUMN-->
+                                    <DataGridTemplateColumn.HeaderTemplate>
+                                        <DataTemplate>
+                                            <Grid IsHitTestVisible="True">
+                                                <Grid.RowDefinitions>
+                                                    <RowDefinition/>
+                                                    <RowDefinition/>
+                                                </Grid.RowDefinitions>
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="70"/>
+                                                    <ColumnDefinition Width="30"/>
+                                                </Grid.ColumnDefinitions>
+                                                <TextBlock Grid.Column="0" Text="{TemplateBinding Content}" Grid.RowSpan="2"/>
+
+                                            </Grid>
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.HeaderTemplate>
+
+                                </DataGridTemplateColumn>
+
+                                <DataGridTemplateColumn Header="As" CanUserSort="True" 
+        SortMemberPath="Assist" MinWidth="60" Width="60">
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <TextBlock Text="{Binding Assist}" />
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                    <!--NAME COLUMN-->
+                                    <DataGridTemplateColumn.HeaderTemplate>
+                                        <DataTemplate>
+                                            <Grid IsHitTestVisible="True">
+                                                <Grid.RowDefinitions>
+                                                    <RowDefinition/>
+                                                    <RowDefinition/>
+                                                </Grid.RowDefinitions>
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="70"/>
+                                                    <ColumnDefinition Width="30"/>
+                                                </Grid.ColumnDefinitions>
+                                                <TextBlock Grid.Column="0" Text="{TemplateBinding Content}" Grid.RowSpan="2"/>
+
+                                            </Grid>
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.HeaderTemplate>
+
+                                </DataGridTemplateColumn>
+
+                                <DataGridTemplateColumn Header="Reb" CanUserSort="True" 
+        SortMemberPath="Reb" MinWidth="60" Width="60">
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <TextBlock Text="{Binding Reb}" />
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                    <!--NAME COLUMN-->
+                                    <DataGridTemplateColumn.HeaderTemplate>
+                                        <DataTemplate>
+                                            <Grid IsHitTestVisible="True">
+                                                <Grid.RowDefinitions>
+                                                    <RowDefinition/>
+                                                    <RowDefinition/>
+                                                </Grid.RowDefinitions>
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="70"/>
+                                                    <ColumnDefinition Width="30"/>
+                                                </Grid.ColumnDefinitions>
+                                                <TextBlock Grid.Column="0" Text="{TemplateBinding Content}" Grid.RowSpan="2"/>
+
+                                            </Grid>
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.HeaderTemplate>
+
+                                </DataGridTemplateColumn>
+
+                            </DataGrid.Columns>
+                        </DataGrid>
+                    </Canvas>
+
+                </Grid>
+            </TabItem>
+
+            <TabItem Header="Halls" Visibility="{Binding TabVisibility}">
+                <Grid Margin="0,0,0,21">
+                    <Button Background="White" Margin="10, 0, 0, 0" Content="Add" Command="{Binding ArenaVM.ClickAddArenaCommand}" Height="40" Width="70" HorizontalAlignment="Left" VerticalAlignment="Top" >
+                        <Button.Style>
+                            <Style TargetType="{x:Type Button}">
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Opacity" Value="0.30" />
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Button.Style>
+                    </Button>
+
+                    <Button Background="White" Margin="85,0,0,0" Content="Modify" Command="{Binding ArenaVM.ClickEditArenaCommand}" Height="40" Width="70" HorizontalAlignment="Left" VerticalAlignment="Top" >
+                        <Button.Style>
+                            <Style TargetType="{x:Type Button}">
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Opacity" Value="0.30" />
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Button.Style>
+                    </Button>
+
+                    <Button Background="White" Margin="160,0,0,0" Content="Delete" Command="{Binding ArenaVM.RemoveArenaCommand}" Height="40" Width="70" HorizontalAlignment="Left" VerticalAlignment="Top" >
+                        <Button.Style>
+                            <Style TargetType="{x:Type Button}">
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Opacity" Value="0.30" />
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Button.Style>
+                    </Button>
+
+                    <Canvas Margin="-26,80,322,8" >
+                        <DataGrid SelectionMode="Single" Height="300" Width="370" IsReadOnly="True" Foreground="White" RowBackground="Transparent" Background="Transparent" ItemsSource="{Binding ArenaVM.Halls,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding ArenaVM.SelectedHall}" CanUserAddRows="false" AutoGenerateColumns="False" HeadersVisibility="Column" CanUserResizeRows="False" >
+                            <DataGrid.Resources>
+
+                                <Style TargetType="{x:Type DataGridColumnHeader}">
+                                    <Setter Property="Foreground" Value="Black" />
+
+                                </Style>
+
+                            </DataGrid.Resources>
+
+                            <DataGrid.Columns>
+
+                                <DataGridTemplateColumn Header="Name" CanUserSort="True" 
+        SortMemberPath="NAZ_HALA" MinWidth="140" Width="140" >
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <TextBlock Text="{Binding NAZ_HALA}" />
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                    <!--NAME COLUMN-->
+                                    <DataGridTemplateColumn.HeaderTemplate>
+                                        <DataTemplate>
+                                            <Grid IsHitTestVisible="True">
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="110"/>
+                                                    <ColumnDefinition Width="30"/>
+                                                </Grid.ColumnDefinitions>
+                                                <TextBlock Grid.Column="0" Text="{TemplateBinding Content}"/>
+                                                <!--FILTER EXPANDER-->
+                                                <Expander Grid.Column="1" IsHitTestVisible="True" 
+                VerticalAlignment="Top" ToolTip="Filter">
+                                                    <Border IsHitTestVisible="True" BorderThickness="1" 
+                  Margin="-90 0 0 0" >
+                                                        <StackPanel Margin="0 4 0 0">
+                                                            <TextBox
+                                                
+                        Text="{Binding DataContext.ArenaVM.NameFilter, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay,
+                        RelativeSource={RelativeSource AncestorType=Window}}" 
+                        
+                        ToolTip="Enter filter term" Width="100" Height="18" FontSize="9" 
+                        BorderThickness="1" />
+                                                        </StackPanel>
+                                                    </Border>
+                                                </Expander>
+                                            </Grid>
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.HeaderTemplate>
+
+                                </DataGridTemplateColumn>
+
+                                <DataGridTemplateColumn Header="Place" CanUserSort="True" 
+        SortMemberPath="GRD_HALA" MinWidth="105" Width="105" >
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <TextBlock Text="{Binding GRD_HALA}" />
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                    <!--NAME COLUMN-->
+                                    <DataGridTemplateColumn.HeaderTemplate>
+                                        <DataTemplate>
+                                            <Grid IsHitTestVisible="True">
+                                                <Grid.RowDefinitions>
+                                                    <RowDefinition/>
+                                                    <RowDefinition/>
+                                                </Grid.RowDefinitions>
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="75"/>
+                                                    <ColumnDefinition Width="30"/>
+                                                </Grid.ColumnDefinitions>
+                                                <TextBlock Grid.Column="0" Text="{TemplateBinding Content}" Grid.RowSpan="2"/>
+                                                <!--FILTER EXPANDER-->
+                                                <Expander Grid.Column="1" IsHitTestVisible="True" 
+                VerticalAlignment="Top" ToolTip="Filter" Grid.RowSpan="2">
+                                                    <Border IsHitTestVisible="True" BorderThickness="1" 
+                  Margin="-75 0 0 0" >
+                                                        <StackPanel Margin="0 4 0 0">
+                                                            <TextBox 
+                                                
+                        Text="{Binding DataContext.ArenaVM.PlaceFilter, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay,
+                        RelativeSource={RelativeSource AncestorType=Window}}" 
+                        
+                        ToolTip="Enter filter term" Width="100" Height="18" FontSize="9" 
+                        BorderThickness="1" />
+                                                        </StackPanel>
+                                                    </Border>
+                                                </Expander>
+                                            </Grid>
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.HeaderTemplate>
+
+                                </DataGridTemplateColumn>
+
+
+                                <DataGridTemplateColumn Header="Country" CanUserSort="True" 
+        SortMemberPath="DRZ_HALA" MinWidth="105" Width="105" >
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <TextBlock Text="{Binding DRZ_HALA}" />
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                    <!--NAME COLUMN-->
+                                    <DataGridTemplateColumn.HeaderTemplate>
+                                        <DataTemplate>
+                                            <Grid IsHitTestVisible="True">
+                                                <Grid.RowDefinitions>
+                                                    <RowDefinition/>
+                                                    <RowDefinition/>
+                                                </Grid.RowDefinitions>
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="75"/>
+                                                    <ColumnDefinition Width="30"/>
+                                                </Grid.ColumnDefinitions>
+                                                <TextBlock Grid.Column="0" Text="{TemplateBinding Content}" Grid.RowSpan="2"/>
+                                                <!--FILTER EXPANDER-->
+                                                <Expander Grid.Column="1" IsHitTestVisible="True" 
+                VerticalAlignment="Top" ToolTip="Filter" Grid.RowSpan="2">
+                                                    <Border IsHitTestVisible="True" BorderThickness="1" 
+                  Margin="-75 0 0 0" >
+                                                        <StackPanel Margin="0 4 0 0">
+                                                            <TextBox 
+                                                
+                        Text="{Binding DataContext.ArenaVM.CountryFilter, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay,
+                        RelativeSource={RelativeSource AncestorType=Window}}" 
+                        
+                        ToolTip="Enter filter term" Width="100" Height="18" FontSize="9" 
+                        BorderThickness="1" />
+                                                        </StackPanel>
+                                                    </Border>
+                                                </Expander>
+                                            </Grid>
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.HeaderTemplate>
+
+                                </DataGridTemplateColumn>
+                                
+                            </DataGrid.Columns>
+                        </DataGrid>
+                    </Canvas>
+
+                    <Canvas Visibility="{Binding ArenaVM.AddOrEditHallCanvasVis, Mode=TwoWay}" Margin="350,80,309,8" Width="300" >
+
+                        <Label Foreground="White" Content="Name:" HorizontalAlignment="Left" Margin="15,45,0,0" VerticalAlignment="Top"/>
+                        <Label Foreground="White" Content="Country:" HorizontalAlignment="Left" Margin="15,80,0,0" VerticalAlignment="Top"/>
+                        <Label Foreground="White" Content="Place:" HorizontalAlignment="Left" Margin="15,115,0,0" VerticalAlignment="Top"/>
+                        <TextBox Text ="{Binding ArenaVM.Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" HorizontalAlignment="Left" Height="23" Margin="95,50,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120">
+
+                            <i:Interaction.Triggers>
+                                <i:EventTrigger EventName="LostFocus">
+                                    <i:EventTrigger.Actions>
+                                        <i:InvokeCommandAction Command="{Binding ArenaVM.LostFocusCommand }" CommandParameter="Name" />
+                                    </i:EventTrigger.Actions>
+                                </i:EventTrigger>
+                            </i:Interaction.Triggers>
+
+                        </TextBox>
+                        <TextBox Text ="{Binding ArenaVM.Country, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" HorizontalAlignment="Left" Height="23" Margin="95,82,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120">
+                            <i:Interaction.Triggers>
+                                <i:EventTrigger EventName="LostFocus">
+                                    <i:EventTrigger.Actions>
+                                        <i:InvokeCommandAction Command="{Binding ArenaVM.LostFocusCommand }" CommandParameter="Country" />
+                                    </i:EventTrigger.Actions>
+                                </i:EventTrigger>
+                            </i:Interaction.Triggers>
+
+                        </TextBox>
+                        <TextBox Text ="{Binding ArenaVM.Place, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" HorizontalAlignment="Left" Height="23" Margin="95,114,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120">
+                            <i:Interaction.Triggers>
+                                <i:EventTrigger EventName="LostFocus">
+                                    <i:EventTrigger.Actions>
+                                        <i:InvokeCommandAction Command="{Binding ArenaVM.LostFocusCommand }" CommandParameter="Place" />
+                                    </i:EventTrigger.Actions>
+                                </i:EventTrigger>
+                            </i:Interaction.Triggers>
+
+                        </TextBox>
+                        <Button Content="Add" Command="{Binding ArenaVM.AddArenaCommand}" Visibility="{Binding ArenaVM.AddButtonVisibility, Mode=TwoWay}" HorizontalAlignment="Left" Margin="55,150,0,0" VerticalAlignment="Top" Height="30" Width="75"/>
+                        <Button Content="Edit" Command="{Binding ArenaVM.EditArenaCommand}" Visibility="{Binding ArenaVM.EditButtonVisibility, Mode=TwoWay}" HorizontalAlignment="Left" Margin="55,150,0,0" VerticalAlignment="Top" Height="30" Width="75"/>
+
+
+                    </Canvas>
+
+                </Grid>
+            </TabItem>
+
+            <TabItem Header="Players" Visibility="{Binding TabVisibility}">
+                <Grid Margin="0,0,0,21">
+                    <Canvas>
+                        <Button Background="White" Margin="10, 0, 0, 0" Content="Add" Command="{Binding PlayerVM.ClickAddPlayerCommand}" Height="40" Width="70" HorizontalAlignment="Left" VerticalAlignment="Top" >
+                            <Button.Style>
+                                <Style TargetType="{x:Type Button}">
+                                    <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+                                    <Setter Property="Background" Value="#ffffff"/>
+                                    <Setter Property="BorderBrush" Value="#cccccc"/>
+                                    <Setter Property="BorderThickness" Value="1"/>
+                                    <Setter Property="Foreground" Value="#333333"/>
+                                    <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                                    <Setter Property="VerticalContentAlignment" Value="Center"/>
+                                    <Setter Property="Padding" Value="16,3,16,3"/>
+                                    <Setter Property="Template">
+                                        <Setter.Value>
+                                            <ControlTemplate TargetType="{x:Type Button}">
+                                                <Border x:Name="Chrome"
+        										Background="{TemplateBinding Background}"
+        										BorderBrush="{TemplateBinding BorderBrush}"
+        										BorderThickness="{TemplateBinding BorderThickness}"
+        										SnapsToDevicePixels="true">
+                                                    <ContentPresenter x:Name="Presenter" Margin="{TemplateBinding Padding}"
+        											VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+        											HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+        											RecognizesAccessKey="True"
+        											SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
+                                                </Border>
+                                                <ControlTemplate.Triggers>
+                                                    <Trigger Property="IsEnabled" Value="false">
+                                                        <Setter Property="Foreground" Value="#333333" />
+                                                    </Trigger>
+                                                    <Trigger Property="IsMouseOver" Value="True">
+                                                        <Setter Property="Background" Value="#FFD7F1F9" />
+                                                        <Setter Property="BorderBrush" Value="#cccccc" />
+                                                        <Setter Property="Foreground" Value="#333333" />
+                                                    </Trigger>
+                                                    <Trigger Property="IsPressed" Value="True">
+                                                        <Setter Property="Background" Value="#cc8400" />
+                                                        <Setter Property="BorderBrush" Value="#1ba1e2"/>
+                                                        <Setter Property="Foreground" Value="#ffffff"/>
+                                                    </Trigger>
+                                                    <Trigger Property="IsFocused" Value="true">
+                                                        <Setter TargetName="Chrome" Property="BorderBrush" Value="#1ba1e2" />
+                                                    </Trigger>
+                                                </ControlTemplate.Triggers>
+                                            </ControlTemplate>
+                                        </Setter.Value>
+                                    </Setter>
+                                </Style>
+                            </Button.Style>
+                        </Button>
+
+                        <Button Background="White" Margin="85,0,0,0" Content="Modify" Command="{Binding PlayerVM.ClickEditPlayerCommand}" Height="40" Width="70" HorizontalAlignment="Left" VerticalAlignment="Top" >
+                            <Button.Style>
+                                <Style TargetType="{x:Type Button}">
+                                    <Style.Triggers>
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <Setter Property="Opacity" Value="0.30" />
+                                        </Trigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Button.Style>
+                        </Button>
+
+                        <Button Background="White" Margin="160,0,0,0" Content="Delete" Command="{Binding PlayerVM.RemovePlayerCommand}" Height="40" Width="70" HorizontalAlignment="Left" VerticalAlignment="Top" >
+                            <Button.Style>
+                                <Style TargetType="{x:Type Button}">
+                                    <Style.Triggers>
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <Setter Property="Opacity" Value="0.30" />
+                                        </Trigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Button.Style>
+                        </Button>
+                    </Canvas>
+
+                    <Canvas Margin="-26,80,322,8" >
+                        <DataGrid SelectionMode="Single" Height="300" Width="335" IsReadOnly="True" Foreground="White" RowBackground="Transparent" Background="Transparent" ItemsSource="{Binding PlayerVM.Players,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding PlayerVM.SelectedPlayer}" CanUserAddRows="false" AutoGenerateColumns="False" HeadersVisibility="Column" CanUserResizeRows="False" >
+                            <DataGrid.Resources>
+
+                                <Style TargetType="{x:Type DataGridColumnHeader}">
+                                    <Setter Property="Foreground" Value="Black" />
+
+                                </Style>
+
+                            </DataGrid.Resources>
+
+                            <DataGrid.Columns>
+
+                                <DataGridTemplateColumn Header="Name" CanUserSort="True" 
+        SortMemberPath="IME_IGR" MinWidth="105" Width="105" >
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <TextBlock Text="{Binding IME_IGR}" />
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                    <!--NAME COLUMN-->
+                                    <DataGridTemplateColumn.HeaderTemplate>
+                                        <DataTemplate>
+                                            <Grid IsHitTestVisible="True">
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="75"/>
+                                                    <ColumnDefinition Width="30"/>
+                                                </Grid.ColumnDefinitions>
+                                                <TextBlock Grid.Column="0" Text="{TemplateBinding Content}"/>
+                                                <!--FILTER EXPANDER-->
+                                                <Expander Grid.Column="1" IsHitTestVisible="True" 
+                VerticalAlignment="Top" ToolTip="Filter">
+                                                    <Border IsHitTestVisible="True" BorderThickness="1" 
+                  Margin="-75 0 0 0" >
+                                                        <StackPanel Margin="0 4 0 0">
+                                                            <TextBox
+                                                
+                        Text="{Binding DataContext.PlayerVM.NameFilter, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay,
+                        RelativeSource={RelativeSource AncestorType=Window}}" 
+                        
+                        ToolTip="Enter filter term" Width="100" Height="18" FontSize="9" 
+                        BorderThickness="1" />
+                                                        </StackPanel>
+                                                    </Border>
+                                                </Expander>
+                                            </Grid>
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.HeaderTemplate>
+
+                                </DataGridTemplateColumn>
+
+                                <DataGridTemplateColumn Header="Surname" CanUserSort="True" 
+        SortMemberPath="PRZ_IGR" MinWidth="105" Width="105" >
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <TextBlock Text="{Binding PRZ_IGR}" />
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                    <!--NAME COLUMN-->
+                                    <DataGridTemplateColumn.HeaderTemplate>
+                                        <DataTemplate>
+                                            <Grid IsHitTestVisible="True">
+                                                <Grid.RowDefinitions>
+                                                    <RowDefinition/>
+                                                    <RowDefinition/>
+                                                </Grid.RowDefinitions>
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="75"/>
+                                                    <ColumnDefinition Width="30"/>
+                                                </Grid.ColumnDefinitions>
+                                                <TextBlock Grid.Column="0" Text="{TemplateBinding Content}" Grid.RowSpan="2"/>
+                                                <!--FILTER EXPANDER-->
+                                                <Expander Grid.Column="1" IsHitTestVisible="True" 
+                VerticalAlignment="Top" ToolTip="Filter" Grid.RowSpan="2">
+                                                    <Border IsHitTestVisible="True" BorderThickness="1" 
+                  Margin="-75 0 0 0" >
+                                                        <StackPanel Margin="0 4 0 0">
+                                                            <TextBox 
+                                                
+                        Text="{Binding DataContext.PlayerVM.SurnameFilter, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay,
+                        RelativeSource={RelativeSource AncestorType=Window}}" 
+                        
+                        ToolTip="Enter filter term" Width="100" Height="18" FontSize="9" 
+                        BorderThickness="1" />
+                                                        </StackPanel>
+                                                    </Border>
+                                                </Expander>
+                                            </Grid>
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.HeaderTemplate>
+
+                                </DataGridTemplateColumn>
+
+                                <DataGridTemplateColumn Header="Club" CanUserSort="True" 
+        SortMemberPath="Klub.NAZ_KLB" MinWidth="105" Width="105" >
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <TextBlock Text="{Binding Klub.NAZ_KLB}" />
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                    <!--NAME COLUMN-->
+                                    <DataGridTemplateColumn.HeaderTemplate>
+                                        <DataTemplate>
+                                            <Grid IsHitTestVisible="True">
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="75"/>
+                                                    <ColumnDefinition Width="30"/>
+                                                </Grid.ColumnDefinitions>
+                                                <TextBlock Grid.Column="0" Text="{TemplateBinding Content}"/>
+                                                <!--FILTER EXPANDER-->
+                                                <Expander Grid.Column="1" IsHitTestVisible="True" 
+                VerticalAlignment="Top" ToolTip="Filter">
+                                                    <Border IsHitTestVisible="True" BorderThickness="1" 
+                  Margin="-75 0 0 0" >
+                                                        <StackPanel Margin="0 4 0 0">
+                                                            <TextBox
+                                                
+                        Text="{Binding DataContext.PlayerVM.ClubFilter, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay,
+                        RelativeSource={RelativeSource AncestorType=Window}}" 
+                        
+                        ToolTip="Enter filter term" Width="100" Height="18" FontSize="9" 
+                        BorderThickness="1" />
+                                                        </StackPanel>
+                                                    </Border>
+                                                </Expander>
+                                            </Grid>
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.HeaderTemplate>
+
+                                </DataGridTemplateColumn>
+
+
+                            </DataGrid.Columns>
+                        </DataGrid>
+                    </Canvas>
+
+                    <Canvas Visibility="{Binding PlayerVM.AddOrEditPlayerCanvasVis, Mode=TwoWay}" Margin="350,80,309,8" Width="300" >
+
+                        <Label Foreground="White" Content="Name:" HorizontalAlignment="Left" Margin="0,5,0,0" VerticalAlignment="Top"/>
+                        <Label Foreground="White" Content="Surname:" HorizontalAlignment="Left" Margin="0,35,0,0" VerticalAlignment="Top"/>
+                        <Label Foreground="White" Content="Club:" HorizontalAlignment="Left" Margin="0,65,0,0" VerticalAlignment="Top" />
+                        <Label Foreground="White" Content="Contract start:"  HorizontalAlignment="Left" VerticalAlignment="Top" Canvas.Top="155"/>
+                        <Label Foreground="White" Content="Contract end:"  HorizontalAlignment="Left" VerticalAlignment="Top" Canvas.Top="180"/>
+                        <Label Foreground="White" Content="Position:"  HorizontalAlignment="Left" VerticalAlignment="Top" Canvas.Top="94"/>
+                        <Label Foreground="White" Content="Height:"  HorizontalAlignment="Left" VerticalAlignment="Top" Canvas.Left="2" Canvas.Top="125"/>
+                        <Label Foreground="White" Content="Image:"  HorizontalAlignment="Left" VerticalAlignment="Top" Canvas.Top="215"/>
+
+                        <Rectangle Fill="#FFF4F4F5" HorizontalAlignment="Left" Height="95" Stroke="Black" VerticalAlignment="Top" Width="95" Canvas.Left="195" Canvas.Top="160"/>
+
+                        <Image Stretch="Fill" Source="{Binding PlayerVM.Image}" HorizontalAlignment="Left" Height="95" VerticalAlignment="Top" Width="95" OpacityMask="#FF232020" Canvas.Left="195" Canvas.Top="160"/>
+
+                        <Button Command="{Binding PlayerVM.BrowseImage}" Content="Browse" HorizontalAlignment="Left" VerticalAlignment="Top"  Width="100" Height="35" Canvas.Left="85" Canvas.Top="215">
+                            <Button.Style>
+                                <Style  TargetType="{x:Type Button}">
+                                    <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+                                    <Setter Property="Background" Value="#ffffff"/>
+                                    <Setter Property="BorderBrush" Value="#cccccc"/>
+                                    <Setter Property="BorderThickness" Value="1"/>
+                                    <Setter Property="Foreground" Value="#333333"/>
+                                    <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                                    <Setter Property="VerticalContentAlignment" Value="Center"/>
+                                    <Setter Property="Padding" Value="16,3,16,3"/>
+                                    <Setter Property="Template">
+                                        <Setter.Value>
+                                            <ControlTemplate TargetType="{x:Type Button}">
+                                                <Border x:Name="Chrome"
+        										Background="{TemplateBinding Background}"
+        										BorderBrush="{TemplateBinding BorderBrush}"
+        										BorderThickness="{TemplateBinding BorderThickness}"
+        										SnapsToDevicePixels="true">
+                                                    <ContentPresenter x:Name="Presenter" Margin="{TemplateBinding Padding}"
+        											VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+        											HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+        											RecognizesAccessKey="True"
+        											SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
+                                                </Border>
+                                                <ControlTemplate.Triggers>
+                                                    <Trigger Property="IsEnabled" Value="false">
+                                                        <Setter Property="Foreground" Value="#333333" />
+                                                    </Trigger>
+                                                    <Trigger Property="IsMouseOver" Value="True">
+                                                        <Setter Property="Background" Value="#FFD7F1F9" />
+                                                        <Setter Property="BorderBrush" Value="#cccccc" />
+                                                        <Setter Property="Foreground" Value="#333333" />
+                                                    </Trigger>
+                                                    <Trigger Property="IsPressed" Value="True">
+                                                        <Setter Property="Background" Value="#cc8400" />
+                                                        <Setter Property="BorderBrush" Value="#1ba1e2"/>
+                                                        <Setter Property="Foreground" Value="#ffffff"/>
+                                                    </Trigger>
+                                                    <Trigger Property="IsFocused" Value="true">
+                                                        <Setter TargetName="Chrome" Property="BorderBrush" Value="#1ba1e2" />
+                                                    </Trigger>
+                                                </ControlTemplate.Triggers>
+                                            </ControlTemplate>
+                                        </Setter.Value>
+                                    </Setter>
+                                </Style>
+                            </Button.Style>
+                        </Button>
+
+                        <TextBox Text ="{Binding PlayerVM.Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" HorizontalAlignment="Left" Height="23" Margin="85,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120">
+
+                            <i:Interaction.Triggers>
+                                <i:EventTrigger EventName="LostFocus">
+                                    <i:EventTrigger.Actions>
+                                        <i:InvokeCommandAction Command="{Binding PlayerVM.LostFocusCommand }" CommandParameter="Name" />
+                                    </i:EventTrigger.Actions>
+                                </i:EventTrigger>
+                            </i:Interaction.Triggers>
+
+                        </TextBox>
+                        <TextBox Text ="{Binding PlayerVM.Surname, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" HorizontalAlignment="Left" Height="23" Margin="85,40,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120">
+                            <i:Interaction.Triggers>
+                                <i:EventTrigger EventName="LostFocus">
+                                    <i:EventTrigger.Actions>
+                                        <i:InvokeCommandAction Command="{Binding PlayerVM.LostFocusCommand }" CommandParameter="Surname" />
+                                    </i:EventTrigger.Actions>
+                                </i:EventTrigger>
+                            </i:Interaction.Triggers>
+
+                        </TextBox>
+
+                        <ComboBox SelectedItem="{Binding Path=PlayerVM.Club, Mode=TwoWay, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}" 
+                  ItemsSource="{Binding PlayerVM.Model.Clubs, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left"  Margin="85,70,0,0" VerticalAlignment="Top" Height="23" Width="120" 
+                                  IsTextSearchEnabled="True" IsEditable="True" StaysOpenOnEdit="True"
+                                  TextSearch.TextPath="NAZ_KLB">
+
+                            <ComboBox.ItemTemplate>
+                                <DataTemplate>
+                                    <TextBlock>
+                                        <TextBlock.Text>
+                                            <MultiBinding StringFormat="{}{0}">
+                                                <Binding Path="NAZ_KLB"/>
+                                                <!--<Binding Path="GRD_KLB"/>-->
+                                            </MultiBinding>
+                                        </TextBlock.Text>
+                                    </TextBlock>
+                                </DataTemplate>
+                            </ComboBox.ItemTemplate>
+
+                            <i:Interaction.Triggers>
+                                <i:EventTrigger EventName="LostFocus">
+                                    <i:EventTrigger.Actions>
+                                        <i:InvokeCommandAction Command="{Binding PlayerVM.LostFocusCommand }" CommandParameter="Club" />
+                                    </i:EventTrigger.Actions>
+                                </i:EventTrigger>
+                            </i:Interaction.Triggers>
+
+                        </ComboBox>
+                        <!--<TextBox Text ="{Binding ClubName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" BorderBrush="Transparent" IsReadOnly="true" Background="Transparent" Margin="95,114,97,0" VerticalAlignment="Top" Height="23"/>-->
+
+
+                        <DatePicker HorizontalAlignment="Left"
+                    Margin="0"
+                    VerticalAlignment="Top"
+                    Text="{Binding PlayerVM.StartDate, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, 
+                    ValidatesOnDataErrors=True}"
+                     DisplayDate="{x:Static System:DateTime.Now}" Canvas.Left="85" Canvas.Top="155" 
+                    >
+
+                            <i:Interaction.Triggers>
+                                <i:EventTrigger EventName="LostFocus">
+                                    <i:EventTrigger.Actions>
+                                        <i:InvokeCommandAction Command="{Binding PlayerVM.LostFocusCommand }" CommandParameter="Start" />
+                                    </i:EventTrigger.Actions>
+                                </i:EventTrigger>
+                            </i:Interaction.Triggers>
+
+                        </DatePicker>
+
+                        <!--DisplayDate="7/7/17"-->
+
+
+                        <DatePicker HorizontalAlignment="Left"
+                    Margin="0"
+                    VerticalAlignment="Top"
+                    Text="{Binding PlayerVM.EndDate, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, 
+                    ValidatesOnDataErrors=True}"
+                     DisplayDate="{x:Static System:DateTime.Now}" Canvas.Left="85" Canvas.Top="185">
+
+                            <i:Interaction.Triggers>
+                                <i:EventTrigger EventName="LostFocus">
+                                    <i:EventTrigger.Actions>
+                                        <i:InvokeCommandAction Command="{Binding PlayerVM.LostFocusCommand }" CommandParameter="End" />
+                                    </i:EventTrigger.Actions>
+                                </i:EventTrigger>
+                            </i:Interaction.Triggers>
+
+                        </DatePicker>
+
+                        <ComboBox SelectedItem="{Binding PlayerVM.Position, Mode=TwoWay, ValidatesOnDataErrors=True}" 
+                  ItemsSource="{Binding PlayerVM.Model.Positions, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left"  Margin="0" VerticalAlignment="Top" Height="23" Width="120" Canvas.Left="85" Canvas.Top="100" 
+                             >
+
+
+                            <i:Interaction.Triggers>
+                                <i:EventTrigger EventName="LostFocus">
+                                    <i:EventTrigger.Actions>
+                                        <i:InvokeCommandAction Command="{Binding PlayerVM.LostFocusCommand }" CommandParameter="Position" />
+                                    </i:EventTrigger.Actions>
+                                </i:EventTrigger>
+                            </i:Interaction.Triggers>
+
+                        </ComboBox>
+
+                        <TextBox Text ="{Binding PlayerVM.Height, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, StringFormat=N2}" HorizontalAlignment="Left" Height="23" Margin="0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Canvas.Left="85" Canvas.Top="130">
+                            <i:Interaction.Triggers>
+                                <i:EventTrigger EventName="LostFocus">
+                                    <i:EventTrigger.Actions>
+                                        <i:InvokeCommandAction Command="{Binding PlayerVM.LostFocusCommand }" CommandParameter="Height" />
+                                    </i:EventTrigger.Actions>
+                                </i:EventTrigger>
+                            </i:Interaction.Triggers>
+
+                        </TextBox>
+
+                        <Button Content="Add" Command="{Binding PlayerVM.AddPlayerCommand}" Visibility="{Binding PlayerVM.AddButtonVisibility, Mode=TwoWay}" HorizontalAlignment="Left" Margin="55,270,0,0" VerticalAlignment="Top" Height="30" Width="75"/>
+                        <Button Content="Edit" Command="{Binding PlayerVM.EditPlayerCommand}" Visibility="{Binding PlayerVM.EditButtonVisibility, Mode=TwoWay}" HorizontalAlignment="Left" Margin="55,270,0,0" VerticalAlignment="Top" Height="30" Width="75"/>
+
+
+                    </Canvas>
+
+                </Grid>
+            </TabItem>
+
+            <TabItem Header="Coaches" Visibility="{Binding TabVisibility}">
+                <Grid Margin="0,0,0,21">
+                    <Button Background="White" Margin="10, 0, 0, 0" Content="Add" Command="{Binding CoachVM.ClickAddCoachCommand}" Height="40" Width="70" HorizontalAlignment="Left" VerticalAlignment="Top" >
+                        <Button.Style>
+                            <Style TargetType="{x:Type Button}">
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Opacity" Value="0.30" />
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Button.Style>
+                    </Button>
+
+                    <Button Background="White" Margin="85,0,0,0" Content="Modify" Command="{Binding CoachVM.ClickEditCoachCommand}" Height="40" Width="70" HorizontalAlignment="Left" VerticalAlignment="Top" >
+                        <Button.Style>
+                            <Style TargetType="{x:Type Button}">
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Opacity" Value="0.30" />
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Button.Style>
+                    </Button>
+
+                    <Button Background="White" Margin="160,0,0,0" Content="Delete" Command="{Binding CoachVM.RemoveCoachCommand}" Height="40" Width="70" HorizontalAlignment="Left" VerticalAlignment="Top" >
+                        <Button.Style>
+                            <Style TargetType="{x:Type Button}">
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Opacity" Value="0.30" />
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Button.Style>
+                    </Button>
+
+                    <Canvas Margin="-26,80,322,8" >
+                        <DataGrid SelectionMode="Single" Height="300" Width="335" IsReadOnly="True" Foreground="White" RowBackground="Transparent" Background="Transparent" ItemsSource="{Binding CoachVM.Coaches,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding CoachVM.SelectedCoach}" CanUserAddRows="false" AutoGenerateColumns="False" HeadersVisibility="Column" CanUserResizeRows="False" >
+                            <DataGrid.Resources>
+                                <!--<Style TargetType="{x:Type DataGridColumnHeader}">
+                    <Setter Property="Background" Value="Orange" />
+
+                </Style>-->
+
+                                <Style TargetType="{x:Type DataGridColumnHeader}">
+                                    <Setter Property="Foreground" Value="Black" />
+
+                                </Style>
+
+                            </DataGrid.Resources>
+
+                            <DataGrid.Columns>
+
+                                <DataGridTemplateColumn Header="Name" CanUserSort="True" 
+        SortMemberPath="IME_TRN" MinWidth="105" Width="105" >
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <TextBlock Text="{Binding IME_TRN}" />
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                    <!--NAME COLUMN-->
+                                    <DataGridTemplateColumn.HeaderTemplate>
+                                        <DataTemplate>
+                                            <Grid IsHitTestVisible="True">
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="75"/>
+                                                    <ColumnDefinition Width="30"/>
+                                                </Grid.ColumnDefinitions>
+                                                <TextBlock Grid.Column="0" Text="{TemplateBinding Content}"/>
+                                                <!--FILTER EXPANDER-->
+                                                <Expander Grid.Column="1" IsHitTestVisible="True" 
+                VerticalAlignment="Top" ToolTip="Filter">
+                                                    <Border IsHitTestVisible="True" BorderThickness="1" 
+                  Margin="-75 0 0 0" >
+                                                        <StackPanel Margin="0 4 0 0">
+                                                            <!--FILTER TEXTBOX-->
+                                                            <!--RelativeSource={RelativeSource AncestorType=Window}}" 
+                        Background="{Binding DataContext.FilteringVm.FilterActive, 
+                        RelativeSource={RelativeSource AncestorType=Window},-->
+                                                            <TextBox
+                                                
+                        Text="{Binding DataContext.CoachVM.NameFilter, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay,
+                        RelativeSource={RelativeSource AncestorType=Window}}" 
+                        
+                        ToolTip="Enter filter term" Width="100" Height="18" FontSize="9" 
+                        BorderThickness="1" />
+                                                            <!--FILTER BUTTONS-->
+                                                            <!--<StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                                                <TextBlock Margin="2">
+                        <Hyperlink Command="{Binding DataContext.FilterApply, 
+                          RelativeSource={RelativeSource AncestorType=Window}}">
+                          Apply
+                        </Hyperlink>
+                                                </TextBlock>
+                                                <TextBlock Margin="2">
+                        <Hyperlink Command="{Binding DataContext.FilterRemove, 
+                          RelativeSource={RelativeSource AncestorType=Window}}">
+                          Clear
+                        </Hyperlink>
+                                                </TextBlock>
+                                            </StackPanel>-->
+                                                        </StackPanel>
+                                                    </Border>
+                                                </Expander>
+                                            </Grid>
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.HeaderTemplate>
+
+                                </DataGridTemplateColumn>
+
+                                <DataGridTemplateColumn Header="Surname" CanUserSort="True" 
+        SortMemberPath="PRZ_TRN" MinWidth="105" Width="105" >
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <TextBlock Text="{Binding PRZ_TRN}" />
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                    <!--NAME COLUMN-->
+                                    <DataGridTemplateColumn.HeaderTemplate>
+                                        <DataTemplate>
+                                            <Grid IsHitTestVisible="True">
+                                                <Grid.RowDefinitions>
+                                                    <RowDefinition/>
+                                                    <RowDefinition/>
+                                                </Grid.RowDefinitions>
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="75"/>
+                                                    <ColumnDefinition Width="30"/>
+                                                </Grid.ColumnDefinitions>
+                                                <TextBlock Grid.Column="0" Text="{TemplateBinding Content}" Grid.RowSpan="2"/>
+                                                <!--FILTER EXPANDER-->
+                                                <Expander Grid.Column="1" IsHitTestVisible="True" 
+                VerticalAlignment="Top" ToolTip="Filter" Grid.RowSpan="2">
+                                                    <Border IsHitTestVisible="True" BorderThickness="1" 
+                  Margin="-75 0 0 0" >
+                                                        <StackPanel Margin="0 4 0 0">
+                                                            <TextBox 
+                                                
+                        Text="{Binding DataContext.CoachVM.SurnameFilter, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay,
+                        RelativeSource={RelativeSource AncestorType=Window}}" 
+                        
+                        ToolTip="Enter filter term" Width="100" Height="18" FontSize="9" 
+                        BorderThickness="1" />
+                                                        </StackPanel>
+                                                    </Border>
+                                                </Expander>
+                                            </Grid>
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.HeaderTemplate>
+
+                                </DataGridTemplateColumn>
+
+                                <DataGridTemplateColumn Header="Club" CanUserSort="True" 
+        SortMemberPath="Klub.NAZ_KLB" MinWidth="105" Width="105" >
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <TextBlock Text="{Binding Klub.NAZ_KLB}" />
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                    <!--NAME COLUMN-->
+                                    <DataGridTemplateColumn.HeaderTemplate>
+                                        <DataTemplate>
+                                            <Grid IsHitTestVisible="True">
+                                                <Grid.RowDefinitions>
+                                                    <RowDefinition/>
+                                                    <RowDefinition/>
+                                                </Grid.RowDefinitions>
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="75"/>
+                                                    <ColumnDefinition Width="30"/>
+                                                </Grid.ColumnDefinitions>
+                                                <TextBlock Grid.Column="0" Text="{TemplateBinding Content}" Grid.RowSpan="2"/>
+                                                <!--FILTER EXPANDER-->
+                                                <Expander Grid.Column="1" IsHitTestVisible="True" 
+                VerticalAlignment="Top" ToolTip="Filter" Grid.RowSpan="2">
+                                                    <Border IsHitTestVisible="True" BorderThickness="1" 
+                  Margin="-75 0 0 0" >
+                                                        <StackPanel Margin="0 4 0 0">
+                                                            <TextBox 
+                                                
+                        Text="{Binding DataContext.CoachVM.ClubFilter, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay,
+                        RelativeSource={RelativeSource AncestorType=Window}}" 
+                        
+                        ToolTip="Enter filter term" Width="100" Height="18" FontSize="9" 
+                        BorderThickness="1" />
+                                                        </StackPanel>
+                                                    </Border>
+                                                </Expander>
+                                            </Grid>
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.HeaderTemplate>
+
+                                </DataGridTemplateColumn>
+
+
+                            </DataGrid.Columns>
+                        </DataGrid>
+                    </Canvas>
+
+                    <Canvas Visibility="{Binding CoachVM.AddOrEditCoachCanvasVis, Mode=TwoWay}" Margin="350,80,309,8" Width="300" >
+
+                        <Label Foreground="White" Content="Name:" HorizontalAlignment="Left" Margin="15,45,0,0" VerticalAlignment="Top"/>
+                        <Label Foreground="White" Content="Surname:" HorizontalAlignment="Left" Margin="15,80,0,0" VerticalAlignment="Top"/>
+                        <Label Foreground="White" Content="Club:" HorizontalAlignment="Left" Margin="15,115,0,0" VerticalAlignment="Top" />
+                        <Label Foreground="White" Content="Contract start:"  HorizontalAlignment="Left" Margin="10,145,0,0" VerticalAlignment="Top"/>
+                        <Label Foreground="White" Content="Contract end:"  HorizontalAlignment="Left" Margin="10,175,0,0" VerticalAlignment="Top"/>
+
+                        <TextBox Text ="{Binding CoachVM.NameCoach, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" HorizontalAlignment="Left" Height="23" Margin="95,50,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120">
+
+                            <i:Interaction.Triggers>
+                                <i:EventTrigger EventName="LostFocus">
+                                    <i:EventTrigger.Actions>
+                                        <i:InvokeCommandAction Command="{Binding CoachVM.LostFocusCommand }" CommandParameter="Name" />
+                                    </i:EventTrigger.Actions>
+                                </i:EventTrigger>
+                            </i:Interaction.Triggers>
+
+                        </TextBox>
+                        <TextBox Text ="{Binding CoachVM.Surname, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" HorizontalAlignment="Left" Height="23" Margin="95,82,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120">
+                            <i:Interaction.Triggers>
+                                <i:EventTrigger EventName="LostFocus">
+                                    <i:EventTrigger.Actions>
+                                        <i:InvokeCommandAction Command="{Binding CoachVM.LostFocusCommand }" CommandParameter="Surname" />
+                                    </i:EventTrigger.Actions>
+                                </i:EventTrigger>
+                            </i:Interaction.Triggers>
+
+                        </TextBox>
+
+                        <ComboBox SelectedItem="{Binding CoachVM.Club, Mode=TwoWay, ValidatesOnDataErrors=True}" 
+                  ItemsSource="{Binding CoachVM.Model.Clubs, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left"  Margin="95,114,0,0" VerticalAlignment="Top" Height="23" Width="120" 
+                                  IsTextSearchEnabled="True" IsEditable="True" StaysOpenOnEdit="True"
+                                  TextSearch.TextPath="NAZ_KLB">
+                            <ComboBox.ItemTemplate>
+                                <DataTemplate>
+                                    <TextBlock>
+                                        <TextBlock.Text>
+                                            <MultiBinding StringFormat="{}{0}">
+                                                <Binding Path="NAZ_KLB"/>
+                                            </MultiBinding>
+                                        </TextBlock.Text>
+                                    </TextBlock>
+                                </DataTemplate>
+                            </ComboBox.ItemTemplate>
+
+                            <i:Interaction.Triggers>
+                                <i:EventTrigger EventName="LostFocus">
+                                    <i:EventTrigger.Actions>
+                                        <i:InvokeCommandAction Command="{Binding CoachVM.LostFocusCommand }" CommandParameter="Club" />
+                                    </i:EventTrigger.Actions>
+                                </i:EventTrigger>
+                            </i:Interaction.Triggers>
+
+                        </ComboBox>
+                        <DatePicker HorizontalAlignment="Left"
+                    Margin="95,148,0,0"
+                    VerticalAlignment="Top"
+                    Text="{Binding CoachVM.StartDate, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, 
+                    ValidatesOnDataErrors=True}"
+                     DisplayDate="{x:Static System:DateTime.Now}" 
+                    >
+
+                            <i:Interaction.Triggers>
+                                <i:EventTrigger EventName="LostFocus">
+                                    <i:EventTrigger.Actions>
+                                        <i:InvokeCommandAction Command="{Binding CoachVM.LostFocusCommand }" CommandParameter="Start" />
+                                    </i:EventTrigger.Actions>
+                                </i:EventTrigger>
+                            </i:Interaction.Triggers>
+
+                        </DatePicker>
+
+                        <!--DisplayDate="7/7/17"-->
+
+
+                        <DatePicker HorizontalAlignment="Left"
+                    Margin="95,175,0,0"
+                    VerticalAlignment="Top"
+                    Text="{Binding CoachVM.EndDate, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, 
+                    ValidatesOnDataErrors=True}"
+                     DisplayDate="{x:Static System:DateTime.Now}">
+
+                            <i:Interaction.Triggers>
+                                <i:EventTrigger EventName="LostFocus">
+                                    <i:EventTrigger.Actions>
+                                        <i:InvokeCommandAction Command="{Binding CoachVM.LostFocusCommand }" CommandParameter="End" />
+                                    </i:EventTrigger.Actions>
+                                </i:EventTrigger>
+                            </i:Interaction.Triggers>
+
+                        </DatePicker>
+
+                        <Button Content="Add" Command="{Binding CoachVM.AddCoachCommand}" Visibility="{Binding CoachVM.AddButtonVisibility, Mode=TwoWay}" HorizontalAlignment="Left" Margin="55,210,0,0" VerticalAlignment="Top" Height="30" Width="75"/>
+                        <Button Content="Edit" Command="{Binding CoachVM.EditCoachCommand}" Visibility="{Binding CoachVM.EditButtonVisibility, Mode=TwoWay}" HorizontalAlignment="Left" Margin="55,210,0,0" VerticalAlignment="Top" Height="30" Width="75"/>
+
+
+                    </Canvas>
+
+                </Grid>
+
+
+
+            </TabItem>
+
+            <TabItem Header="Referees" Visibility="{Binding TabVisibility}">
+                <Grid Margin="0,0,0,21">
+                    <Button Background="White" Margin="10, 0, 0, 0" Content="Add" Command="{Binding RefereeVM.ClickAddRefereeCommand}" Height="40" Width="70" HorizontalAlignment="Left" VerticalAlignment="Top" >
+                        <Button.Style>
+                            <Style TargetType="{x:Type Button}">
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Opacity" Value="0.30" />
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Button.Style>
+                    </Button>
+
+                    <Button Background="White" Margin="85,0,0,0" Content="Modify" Command="{Binding RefereeVM.ClickEditRefereeCommand}" Height="40" Width="70" HorizontalAlignment="Left" VerticalAlignment="Top" >
+                        <Button.Style>
+                            <Style TargetType="{x:Type Button}">
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Opacity" Value="0.30" />
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Button.Style>
+                    </Button>
+
+                    <Button Background="White" Margin="160,0,0,0" Content="Delete" Command="{Binding RefereeVM.RemoveRefereeCommand}" Height="40" Width="70" HorizontalAlignment="Left" VerticalAlignment="Top" >
+                        <Button.Style>
+                            <Style TargetType="{x:Type Button}">
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Opacity" Value="0.30" />
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Button.Style>
+                    </Button>
+
+                    <Canvas Margin="-26,80,322,8" >
+                        <DataGrid SelectionMode="Single" Height="300" Width="335" IsReadOnly="True" Foreground="White" RowBackground="Transparent" Background="Transparent" ItemsSource="{Binding RefereeVM.Referees,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding RefereeVM.SelectedReferee}" CanUserAddRows="false" AutoGenerateColumns="False" HeadersVisibility="Column" CanUserResizeRows="False" >
+                            <DataGrid.Resources>
+
+                                <Style TargetType="{x:Type DataGridColumnHeader}">
+                                    <Setter Property="Foreground" Value="Black" />
+
+                                </Style>
+
+                            </DataGrid.Resources>
+
+                            <DataGrid.Columns>
+
+                                <DataGridTemplateColumn Header="Name" CanUserSort="True" 
+        SortMemberPath="IME_SUD" MinWidth="105" Width="105" >
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <TextBlock Text="{Binding IME_SUD}" />
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                    <!--NAME COLUMN-->
+                                    <DataGridTemplateColumn.HeaderTemplate>
+                                        <DataTemplate>
+                                            <Grid IsHitTestVisible="True">
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="75"/>
+                                                    <ColumnDefinition Width="30"/>
+                                                </Grid.ColumnDefinitions>
+                                                <TextBlock Grid.Column="0" Text="{TemplateBinding Content}"/>
+                                                <!--FILTER EXPANDER-->
+                                                <Expander Grid.Column="1" IsHitTestVisible="True" 
+                VerticalAlignment="Top" ToolTip="Filter">
+                                                    <Border IsHitTestVisible="True" BorderThickness="1" 
+                  Margin="-75 0 0 0" >
+                                                        <StackPanel Margin="0 4 0 0">
+                                                            <TextBox
+                                                
+                        Text="{Binding DataContext.RefereeVM.NameFilter, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay,
+                        RelativeSource={RelativeSource AncestorType=Window}}" 
+                        
+                        ToolTip="Enter filter term" Width="100" Height="18" FontSize="9" 
+                        BorderThickness="1" />
+                                                        </StackPanel>
+                                                    </Border>
+                                                </Expander>
+                                            </Grid>
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.HeaderTemplate>
+
+                                </DataGridTemplateColumn>
+
+                                <DataGridTemplateColumn Header="Surname" CanUserSort="True" 
+        SortMemberPath="PRZ_SUD" MinWidth="105" Width="105" >
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <TextBlock Text="{Binding PRZ_SUD}" />
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                    <!--NAME COLUMN-->
+                                    <DataGridTemplateColumn.HeaderTemplate>
+                                        <DataTemplate>
+                                            <Grid IsHitTestVisible="True">
+                                                <Grid.RowDefinitions>
+                                                    <RowDefinition/>
+                                                    <RowDefinition/>
+                                                </Grid.RowDefinitions>
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="75"/>
+                                                    <ColumnDefinition Width="30"/>
+                                                </Grid.ColumnDefinitions>
+                                                <TextBlock Grid.Column="0" Text="{TemplateBinding Content}" Grid.RowSpan="2"/>
+                                                <!--FILTER EXPANDER-->
+                                                <Expander Grid.Column="1" IsHitTestVisible="True" 
+                VerticalAlignment="Top" ToolTip="Filter" Grid.RowSpan="2">
+                                                    <Border IsHitTestVisible="True" BorderThickness="1" 
+                  Margin="-75 0 0 0" >
+                                                        <StackPanel Margin="0 4 0 0">
+                                                            <TextBox 
+                                                
+                        Text="{Binding DataContext.RefereeVM.SurnameFilter, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay,
+                        RelativeSource={RelativeSource AncestorType=Window}}" 
+                        
+                        ToolTip="Enter filter term" Width="100" Height="18" FontSize="9" 
+                        BorderThickness="1" />
+                                                        </StackPanel>
+                                                    </Border>
+                                                </Expander>
+                                            </Grid>
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.HeaderTemplate>
+
+                                </DataGridTemplateColumn>
+
+                                <DataGridTemplateColumn Header="Country" CanUserSort="True" 
+        SortMemberPath="DRZ_SUD" MinWidth="105" Width="105" >
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <TextBlock Text="{Binding DRZ_SUD}" />
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                    <!--NAME COLUMN-->
+                                    <DataGridTemplateColumn.HeaderTemplate>
+                                        <DataTemplate>
+                                            <Grid IsHitTestVisible="True">
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="75"/>
+                                                    <ColumnDefinition Width="30"/>
+                                                </Grid.ColumnDefinitions>
+                                                <TextBlock Grid.Column="0" Text="{TemplateBinding Content}"/>
+                                                <!--FILTER EXPANDER-->
+                                                <Expander Grid.Column="1" IsHitTestVisible="True" 
+                VerticalAlignment="Top" ToolTip="Filter">
+                                                    <Border IsHitTestVisible="True" BorderThickness="1" 
+                  Margin="-75 0 0 0" >
+                                                        <StackPanel Margin="0 4 0 0">
+                                                            <TextBox
+                                                
+                        Text="{Binding DataContext.RefereeVM.CountryFilter, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay,
+                        RelativeSource={RelativeSource AncestorType=Window}}" 
+                        
+                        ToolTip="Enter filter term" Width="100" Height="18" FontSize="9" 
+                        BorderThickness="1" />
+                                                        </StackPanel>
+                                                    </Border>
+                                                </Expander>
+                                            </Grid>
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.HeaderTemplate>
+
+                                </DataGridTemplateColumn>
+                                
+                                
+                            </DataGrid.Columns>
+                        </DataGrid>
+                    </Canvas>
+
+                    <Canvas Visibility="{Binding RefereeVM.AddOrEditRefereeCanvasVis, Mode=TwoWay}" Margin="350,80,309,8" Width="300" >
+
+                        <Label Foreground="White" Content="Name:" HorizontalAlignment="Left" Margin="15,45,0,0" VerticalAlignment="Top"/>
+                        <Label Foreground="White" Content="Surname:" HorizontalAlignment="Left" Margin="15,80,0,0" VerticalAlignment="Top"/>
+                        <Label Foreground="White" Content="Country:" HorizontalAlignment="Left" Margin="15,115,0,0" VerticalAlignment="Top"/>
+                        <TextBox Text ="{Binding RefereeVM.Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" HorizontalAlignment="Left" Height="23" Margin="95,50,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120">
+
+                            <i:Interaction.Triggers>
+                                <i:EventTrigger EventName="LostFocus">
+                                    <i:EventTrigger.Actions>
+                                        <i:InvokeCommandAction Command="{Binding RefereeVM.LostFocusCommand }" CommandParameter="Name" />
+                                    </i:EventTrigger.Actions>
+                                </i:EventTrigger>
+                            </i:Interaction.Triggers>
+
+                        </TextBox>
+                        <TextBox Text ="{Binding RefereeVM.Surname, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" HorizontalAlignment="Left" Height="23" Margin="95,82,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120">
+                            <i:Interaction.Triggers>
+                                <i:EventTrigger EventName="LostFocus">
+                                    <i:EventTrigger.Actions>
+                                        <i:InvokeCommandAction Command="{Binding RefereeVM.LostFocusCommand }" CommandParameter="Surname" />
+                                    </i:EventTrigger.Actions>
+                                </i:EventTrigger>
+                            </i:Interaction.Triggers>
+
+                        </TextBox>
+                        <TextBox Text ="{Binding RefereeVM.Country, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" HorizontalAlignment="Left" Height="23" Margin="95,114,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120">
+                            <i:Interaction.Triggers>
+                                <i:EventTrigger EventName="LostFocus">
+                                    <i:EventTrigger.Actions>
+                                        <i:InvokeCommandAction Command="{Binding RefereeVM.LostFocusCommand }" CommandParameter="Country" />
+                                    </i:EventTrigger.Actions>
+                                </i:EventTrigger>
+                            </i:Interaction.Triggers>
+
+                        </TextBox>
+                        <Button Content="Add" Command="{Binding RefereeVM.AddRefereeCommand}" Visibility="{Binding RefereeVM.AddButtonVisibility, Mode=TwoWay}" HorizontalAlignment="Left" Margin="55,150,0,0" VerticalAlignment="Top" Height="30" Width="75"/>
+                        <Button Content="Edit" Command="{Binding RefereeVM.EditRefereeCommand}" Visibility="{Binding RefereeVM.EditButtonVisibility, Mode=TwoWay}" HorizontalAlignment="Left" Margin="55,150,0,0" VerticalAlignment="Top" Height="30" Width="75"/>
+
+
+                    </Canvas>
+
+                </Grid>
+            </TabItem>
+
+        </TabControl>
+
+        <Button Content="Generate &#x0a;competition" Visibility="{Binding CompetitionVisibility, Mode=TwoWay}" Command="{Binding GenerateCommand}" HorizontalAlignment="Left" Margin="5,5,0,0" VerticalAlignment="Top" Background="White" Height="40" Width="75">
+        </Button>
+
+
+
+    </Grid>
+</Window>

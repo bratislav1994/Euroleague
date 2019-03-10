@@ -1,0 +1,6 @@
+ALTER TABLE Utakmica ADD CONSTRAINT Utakmica_PK PRIMARY KEY CLUSTERED (OZN_UTK)
+     WITH (
+     ALLOW_PAGE_LOCKS = ON , 
+     ALLOW_ROW_LOCKS = ON )
+     ON "default" 
+    GO

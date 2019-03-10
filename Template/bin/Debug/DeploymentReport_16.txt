@@ -1,0 +1,40 @@
+﻿** Highlights
+     Tables that will be rebuilt
+       [dbo].[Evroliga]
+       [dbo].[Hala]
+       [dbo].[Igrac]
+       [dbo].[IgracIgra]
+       [dbo].[Klub]
+       [dbo].[Rezervacija]
+       [dbo].[Sudi]
+       [dbo].[Sudija]
+       [dbo].[Trener]
+       [dbo].[Utakmica]
+     Clustered indexes that will be dropped
+       None
+     Clustered indexes that will be created
+       None
+     Possible data issues
+       None
+
+** User actions
+     Table rebuild
+       [dbo].[Evroliga] (Table)
+       [dbo].[Hala] (Table)
+       [dbo].[Igrac] (Table)
+       [dbo].[IgracIgra] (Table)
+       [dbo].[Klub] (Table)
+       [dbo].[Rezervacija] (Table)
+       [dbo].[Sudi] (Table)
+       [dbo].[Sudija] (Table)
+       [dbo].[Trener] (Table)
+       [dbo].[Utakmica] (Table)
+
+** Supporting actions
+     Refresh
+       [dbo].[Stats] (Procedure)
+       [dbo].[DateValidationReservation] (Procedure)
+       [dbo].[DateValidationReservationModify] (Procedure)
+
+The column KONFMDJ_UTK on table [dbo].[Utakmica] must be changed from NULL to NOT NULL. If the table contains data, the ALTER script may not work. To avoid this issue, you must add values to this column for all rows or mark it as allowing NULL values, or enable the generation of smart-defaults as a deployment option.
+

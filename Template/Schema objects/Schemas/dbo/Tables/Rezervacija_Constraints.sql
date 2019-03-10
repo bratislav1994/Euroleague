@@ -1,0 +1,6 @@
+ALTER TABLE Rezervacija ADD CONSTRAINT Rezervacija_PK PRIMARY KEY CLUSTERED (Klub_ID_KLB, Hala_OZN_HALA, SFR_REZ)
+     WITH (
+     ALLOW_PAGE_LOCKS = ON , 
+     ALLOW_ROW_LOCKS = ON )
+     ON "default" 
+    GO

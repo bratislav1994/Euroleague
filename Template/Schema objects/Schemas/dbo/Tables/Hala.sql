@@ -1,0 +1,9 @@
+CREATE TABLE Hala 
+    (
+     OZN_HALA VARCHAR (64) NOT NULL , 
+     NAZ_HALA VARCHAR (64) NOT NULL , 
+     DRZ_HALA VARCHAR (64) NOT NULL , 
+     GRD_HALA VARCHAR (64) NOT NULL 
+    )
+    ON "default"
+GO

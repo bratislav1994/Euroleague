@@ -1,0 +1,6 @@
+ALTER TABLE Evroliga ADD CONSTRAINT Evroliga_PK PRIMARY KEY CLUSTERED (OZN_LIG)
+     WITH (
+     ALLOW_PAGE_LOCKS = ON , 
+     ALLOW_ROW_LOCKS = ON )
+     ON "default" 
+    GO

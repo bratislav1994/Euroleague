@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="a0e37d21b9154d19982a5c78918a5e29" Name="Diagram1">
+        <EntityTypeShape EntityType="Euroleague3Model.Evroliga" Width="1.5" PointX="0.75" PointY="9.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Euroleague3Model.Hala" Width="1.5" PointX="6" PointY="9.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Euroleague3Model.Igrac" Width="1.5" PointX="5.25" PointY="5.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="Euroleague3Model.IgracIgra" Width="1.5" PointX="7.5" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Euroleague3Model.Klub" Width="1.5" PointX="3" PointY="6.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="Euroleague3Model.Nalog" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Euroleague3Model.Rezervacija" Width="1.5" PointX="8.25" PointY="9.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="Euroleague3Model.Sudi" Width="1.5" PointX="12.5" PointY="8.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Euroleague3Model.Sudija" Width="1.5" PointX="3" PointY="12.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="Euroleague3Model.Trener" Width="1.5" PointX="5.25" PointY="12.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="Euroleague3Model.Utakmica" Width="1.5" PointX="10.25" PointY="5" IsExpanded="true" />
+        <AssociationConnector Association="Euroleague3Model.Klub_Evroliga_FK" ManuallyRouted="false" />
+        <AssociationConnector Association="Euroleague3Model.Sudija_Evroliga_FK" ManuallyRouted="false" />
+        <AssociationConnector Association="Euroleague3Model.Utakmica_Evroliga_FK" ManuallyRouted="false" />
+        <AssociationConnector Association="Euroleague3Model.Rezervacija_Hala_FK" ManuallyRouted="false" />
+        <AssociationConnector Association="Euroleague3Model.Igrac_Klub_FK" ManuallyRouted="false" />
+        <AssociationConnector Association="Euroleague3Model.IgracIgra_Igrac_FK" ManuallyRouted="false" />
+        <AssociationConnector Association="Euroleague3Model.IgracIgra_Utakmica_FK" ManuallyRouted="false" />
+        <AssociationConnector Association="Euroleague3Model.Rezervacija_Klub_FK" ManuallyRouted="false" />
+        <AssociationConnector Association="Euroleague3Model.Trener_Klub_FK" ManuallyRouted="false" />
+        <AssociationConnector Association="Euroleague3Model.Utakmica_Klub_FK" ManuallyRouted="false" />
+        <AssociationConnector Association="Euroleague3Model.Utakmica_Klub_FKv2" ManuallyRouted="false" />
+        <AssociationConnector Association="Euroleague3Model.Sudi_Sudija_FK" ManuallyRouted="false" />
+        <AssociationConnector Association="Euroleague3Model.Sudi_Utakmica_FK" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

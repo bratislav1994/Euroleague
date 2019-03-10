@@ -1,0 +1,703 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="Euroleague3Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Evroliga">
+          <Key>
+            <PropertyRef Name="OZN_LIG" />
+          </Key>
+          <Property Name="OZN_LIG" Type="varchar" MaxLength="64" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Hala">
+          <Key>
+            <PropertyRef Name="OZN_HALA" />
+          </Key>
+          <Property Name="OZN_HALA" Type="varchar" MaxLength="64" Nullable="false" />
+          <Property Name="NAZ_HALA" Type="varchar" MaxLength="64" Nullable="false" />
+          <Property Name="DRZ_HALA" Type="varchar" MaxLength="64" Nullable="false" />
+          <Property Name="GRD_HALA" Type="varchar" MaxLength="64" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Igrac">
+          <Key>
+            <PropertyRef Name="LICBR_IGR" />
+          </Key>
+          <Property Name="LICBR_IGR" Type="varchar" MaxLength="64" Nullable="false" />
+          <Property Name="IME_IGR" Type="varchar" MaxLength="64" Nullable="false" />
+          <Property Name="PRZ_IGR" Type="varchar" MaxLength="64" Nullable="false" />
+          <Property Name="PDATUG_IGR" Type="date" Nullable="false" />
+          <Property Name="KDATUG_IGR" Type="date" Nullable="false" />
+          <Property Name="POZ_IGR" Type="varchar" MaxLength="64" Nullable="false" />
+          <Property Name="VIS_IGR" Type="real" Nullable="false" />
+          <Property Name="SLIKA_IGR" Type="varbinary(max)" />
+          <Property Name="Klub_ID_KLB" Type="varchar" MaxLength="64" Nullable="false" />
+        </EntityType>
+        <EntityType Name="IgracIgra">
+          <Key>
+            <PropertyRef Name="Utakmica_OZN_UTK" />
+            <PropertyRef Name="Igrac_LICBR_IGR" />
+          </Key>
+          <Property Name="POENI_IGRACIGRA" Type="int" Nullable="false" />
+          <Property Name="AS_IGRACIGRA" Type="int" Nullable="false" />
+          <Property Name="SK_IGRACIGRA" Type="int" Nullable="false" />
+          <Property Name="Utakmica_OZN_UTK" Type="varchar" MaxLength="64" Nullable="false" />
+          <Property Name="Igrac_LICBR_IGR" Type="varchar" MaxLength="64" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Klub">
+          <Key>
+            <PropertyRef Name="ID_KLB" />
+          </Key>
+          <Property Name="ID_KLB" Type="varchar" MaxLength="64" Nullable="false" />
+          <Property Name="NAZ_KLB" Type="varchar" MaxLength="64" Nullable="false" />
+          <Property Name="DRZ_KLB" Type="varchar" MaxLength="64" Nullable="false" />
+          <Property Name="GRD_KLB" Type="varchar" MaxLength="64" Nullable="false" />
+          <Property Name="POB_KLB" Type="int" Nullable="false" />
+          <Property Name="POR_KLB" Type="int" Nullable="false" />
+          <Property Name="KOSRAZ_KLB" Type="int" Nullable="false" />
+          <Property Name="Evroliga_OZN_LIG" Type="varchar" MaxLength="64" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Nalog">
+          <Key>
+            <PropertyRef Name="IME_NLG" />
+          </Key>
+          <Property Name="IME_NLG" Type="varchar" MaxLength="64" Nullable="false" />
+          <Property Name="SFR_NLG" Type="varchar" MaxLength="64" Nullable="false" />
+          <Property Name="ULOGA_NLG" Type="varchar" MaxLength="64" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Rezervacija">
+          <Key>
+            <PropertyRef Name="Klub_ID_KLB" />
+            <PropertyRef Name="Hala_OZN_HALA" />
+            <PropertyRef Name="SFR_REZ" />
+          </Key>
+          <Property Name="Klub_ID_KLB" Type="varchar" MaxLength="64" Nullable="false" />
+          <Property Name="Hala_OZN_HALA" Type="varchar" MaxLength="64" Nullable="false" />
+          <Property Name="PVRMREZ_HALA" Type="date" Nullable="false" />
+          <Property Name="KVRMREZ_HALA" Type="date" Nullable="false" />
+          <Property Name="SFR_REZ" Type="varchar" MaxLength="64" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Sudi">
+          <Key>
+            <PropertyRef Name="Sudija_LICBR_SUD" />
+            <PropertyRef Name="Utakmica_OZN_UTK" />
+            <PropertyRef Name="ID_SUDI" />
+          </Key>
+          <Property Name="Sudija_LICBR_SUD" Type="varchar" MaxLength="64" Nullable="false" />
+          <Property Name="Utakmica_OZN_UTK" Type="varchar" MaxLength="64" Nullable="false" />
+          <Property Name="ID_SUDI" Type="varchar" MaxLength="64" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Sudija">
+          <Key>
+            <PropertyRef Name="LICBR_SUD" />
+          </Key>
+          <Property Name="LICBR_SUD" Type="varchar" MaxLength="64" Nullable="false" />
+          <Property Name="IME_SUD" Type="varchar" MaxLength="64" Nullable="false" />
+          <Property Name="PRZ_SUD" Type="varchar" MaxLength="64" Nullable="false" />
+          <Property Name="DRZ_SUD" Type="varchar" MaxLength="64" Nullable="false" />
+          <Property Name="Evroliga_OZN_LIG" Type="varchar" MaxLength="64" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Trener">
+          <Key>
+            <PropertyRef Name="LICBR_TRN" />
+          </Key>
+          <Property Name="LICBR_TRN" Type="varchar" MaxLength="64" Nullable="false" />
+          <Property Name="IME_TRN" Type="varchar" MaxLength="64" Nullable="false" />
+          <Property Name="PRZ_TRN" Type="varchar" MaxLength="64" Nullable="false" />
+          <Property Name="PDATUG_TRN" Type="date" Nullable="false" />
+          <Property Name="KDATUG_TRN" Type="date" Nullable="false" />
+          <Property Name="Klub_ID_KLB" Type="varchar" MaxLength="64" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Utakmica">
+          <Key>
+            <PropertyRef Name="OZN_UTK" />
+          </Key>
+          <Property Name="OZN_UTK" Type="varchar" MaxLength="64" Nullable="false" />
+          <Property Name="RBRKOLA_UTK" Type="int" Nullable="false" />
+          <Property Name="DOMPOENI_UTK" Type="int" />
+          <Property Name="GOSTPOENI_UTK" Type="int" />
+          <Property Name="KONFMDJ_UTK" Type="bit" Nullable="false" />
+          <Property Name="Evroliga_OZN_LIG" Type="varchar" MaxLength="64" Nullable="false" />
+          <Property Name="Klub_ID_KLB1" Type="varchar" MaxLength="64" Nullable="false" />
+          <Property Name="Klub_ID_KLB" Type="varchar" MaxLength="64" Nullable="false" />
+        </EntityType>
+        <Function Name="DateValidationReservation" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="startDate" Type="date" Mode="In" />
+          <Parameter Name="endDate" Type="date" Mode="In" />
+          <Parameter Name="hallId" Type="varchar" Mode="In" />
+          <Parameter Name="isOk" Type="varchar" Mode="InOut" />
+        </Function>
+        <Function Name="DateValidationReservationModify" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="startDate" Type="date" Mode="In" />
+          <Parameter Name="endDate" Type="date" Mode="In" />
+          <Parameter Name="oldRezId" Type="varchar" Mode="In" />
+          <Parameter Name="oldHalaOzn" Type="varchar" Mode="In" />
+          <Parameter Name="isOk" Type="varchar" Mode="InOut" />
+        </Function>
+        <Function Name="Stats" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="playerId" Type="varchar" Mode="In" />
+          <Parameter Name="name" Type="varchar" Mode="InOut" />
+          <Parameter Name="games" Type="int" Mode="InOut" />
+          <Parameter Name="pts" Type="float" Mode="InOut" />
+          <Parameter Name="as" Type="float" Mode="InOut" />
+          <Parameter Name="reb" Type="float" Mode="InOut" />
+        </Function>
+        <EntityContainer Name="Euroleague3ModelStoreContainer">
+          <EntitySet Name="Evroliga" EntityType="Self.Evroliga" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Hala" EntityType="Self.Hala" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Igrac" EntityType="Self.Igrac" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="IgracIgra" EntityType="Self.IgracIgra" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Klub" EntityType="Self.Klub" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Nalog" EntityType="Self.Nalog" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Rezervacija" EntityType="Self.Rezervacija" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Sudi" EntityType="Self.Sudi" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Sudija" EntityType="Self.Sudija" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Trener" EntityType="Self.Trener" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Utakmica" EntityType="Self.Utakmica" Schema="dbo" store:Type="Tables" />
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="Euroleague3Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Evroliga">
+          <Key>
+            <PropertyRef Name="OZN_LIG" />
+          </Key>
+          <Property Name="OZN_LIG" Type="String" MaxLength="64" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Klubs" Relationship="Self.Klub_Evroliga_FK" FromRole="Evroliga" ToRole="Klub" />
+          <NavigationProperty Name="Sudijas" Relationship="Self.Sudija_Evroliga_FK" FromRole="Evroliga" ToRole="Sudija" />
+          <NavigationProperty Name="Utakmicas" Relationship="Self.Utakmica_Evroliga_FK" FromRole="Evroliga" ToRole="Utakmica" />
+        </EntityType>
+        <EntityType Name="Hala">
+          <Key>
+            <PropertyRef Name="OZN_HALA" />
+          </Key>
+          <Property Name="OZN_HALA" Type="String" MaxLength="64" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="NAZ_HALA" Type="String" MaxLength="64" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="DRZ_HALA" Type="String" MaxLength="64" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="GRD_HALA" Type="String" MaxLength="64" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Rezervacijas" Relationship="Self.Rezervacija_Hala_FK" FromRole="Hala" ToRole="Rezervacija" />
+        </EntityType>
+        <EntityType Name="Igrac">
+          <Key>
+            <PropertyRef Name="LICBR_IGR" />
+          </Key>
+          <Property Name="LICBR_IGR" Type="String" MaxLength="64" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="IME_IGR" Type="String" MaxLength="64" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="PRZ_IGR" Type="String" MaxLength="64" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="PDATUG_IGR" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="KDATUG_IGR" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="POZ_IGR" Type="String" MaxLength="64" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="VIS_IGR" Type="Single" Nullable="false" />
+          <Property Name="SLIKA_IGR" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="Klub_ID_KLB" Type="String" MaxLength="64" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Klub" Relationship="Self.Igrac_Klub_FK" FromRole="Igrac" ToRole="Klub" />
+          <NavigationProperty Name="IgracIgras" Relationship="Self.IgracIgra_Igrac_FK" FromRole="Igrac" ToRole="IgracIgra" />
+        </EntityType>
+        <EntityType Name="IgracIgra">
+          <Key>
+            <PropertyRef Name="Utakmica_OZN_UTK" />
+            <PropertyRef Name="Igrac_LICBR_IGR" />
+          </Key>
+          <Property Name="POENI_IGRACIGRA" Type="Int32" Nullable="false" />
+          <Property Name="AS_IGRACIGRA" Type="Int32" Nullable="false" />
+          <Property Name="SK_IGRACIGRA" Type="Int32" Nullable="false" />
+          <Property Name="Utakmica_OZN_UTK" Type="String" MaxLength="64" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Igrac_LICBR_IGR" Type="String" MaxLength="64" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Igrac" Relationship="Self.IgracIgra_Igrac_FK" FromRole="IgracIgra" ToRole="Igrac" />
+          <NavigationProperty Name="Utakmica" Relationship="Self.IgracIgra_Utakmica_FK" FromRole="IgracIgra" ToRole="Utakmica" />
+        </EntityType>
+        <EntityType Name="Klub">
+          <Key>
+            <PropertyRef Name="ID_KLB" />
+          </Key>
+          <Property Name="ID_KLB" Type="String" MaxLength="64" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="NAZ_KLB" Type="String" MaxLength="64" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="DRZ_KLB" Type="String" MaxLength="64" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="GRD_KLB" Type="String" MaxLength="64" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="POB_KLB" Type="Int32" Nullable="false" />
+          <Property Name="POR_KLB" Type="Int32" Nullable="false" />
+          <Property Name="KOSRAZ_KLB" Type="Int32" Nullable="false" />
+          <Property Name="Evroliga_OZN_LIG" Type="String" MaxLength="64" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Evroliga" Relationship="Self.Klub_Evroliga_FK" FromRole="Klub" ToRole="Evroliga" />
+          <NavigationProperty Name="Igracs" Relationship="Self.Igrac_Klub_FK" FromRole="Klub" ToRole="Igrac" />
+          <NavigationProperty Name="Rezervacijas" Relationship="Self.Rezervacija_Klub_FK" FromRole="Klub" ToRole="Rezervacija" />
+          <NavigationProperty Name="Treners" Relationship="Self.Trener_Klub_FK" FromRole="Klub" ToRole="Trener" />
+          <NavigationProperty Name="Utakmicas" Relationship="Self.Utakmica_Klub_FK" FromRole="Klub" ToRole="Utakmica" />
+          <NavigationProperty Name="Utakmicas1" Relationship="Self.Utakmica_Klub_FKv2" FromRole="Klub" ToRole="Utakmica" />
+        </EntityType>
+        <EntityType Name="Nalog">
+          <Key>
+            <PropertyRef Name="IME_NLG" />
+          </Key>
+          <Property Name="IME_NLG" Type="String" MaxLength="64" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="SFR_NLG" Type="String" MaxLength="64" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ULOGA_NLG" Type="String" MaxLength="64" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Rezervacija">
+          <Key>
+            <PropertyRef Name="Klub_ID_KLB" />
+            <PropertyRef Name="Hala_OZN_HALA" />
+            <PropertyRef Name="SFR_REZ" />
+          </Key>
+          <Property Name="Klub_ID_KLB" Type="String" MaxLength="64" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Hala_OZN_HALA" Type="String" MaxLength="64" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="PVRMREZ_HALA" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="KVRMREZ_HALA" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="SFR_REZ" Type="String" MaxLength="64" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Hala" Relationship="Self.Rezervacija_Hala_FK" FromRole="Rezervacija" ToRole="Hala" />
+          <NavigationProperty Name="Klub" Relationship="Self.Rezervacija_Klub_FK" FromRole="Rezervacija" ToRole="Klub" />
+        </EntityType>
+        <EntityType Name="Sudi">
+          <Key>
+            <PropertyRef Name="Sudija_LICBR_SUD" />
+            <PropertyRef Name="Utakmica_OZN_UTK" />
+            <PropertyRef Name="ID_SUDI" />
+          </Key>
+          <Property Name="Sudija_LICBR_SUD" Type="String" MaxLength="64" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Utakmica_OZN_UTK" Type="String" MaxLength="64" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ID_SUDI" Type="String" MaxLength="64" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Sudija" Relationship="Self.Sudi_Sudija_FK" FromRole="Sudi" ToRole="Sudija" />
+          <NavigationProperty Name="Utakmica" Relationship="Self.Sudi_Utakmica_FK" FromRole="Sudi" ToRole="Utakmica" />
+        </EntityType>
+        <EntityType Name="Sudija">
+          <Key>
+            <PropertyRef Name="LICBR_SUD" />
+          </Key>
+          <Property Name="LICBR_SUD" Type="String" MaxLength="64" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="IME_SUD" Type="String" MaxLength="64" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="PRZ_SUD" Type="String" MaxLength="64" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="DRZ_SUD" Type="String" MaxLength="64" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Evroliga_OZN_LIG" Type="String" MaxLength="64" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Evroliga" Relationship="Self.Sudija_Evroliga_FK" FromRole="Sudija" ToRole="Evroliga" />
+          <NavigationProperty Name="Sudis" Relationship="Self.Sudi_Sudija_FK" FromRole="Sudija" ToRole="Sudi" />
+        </EntityType>
+        <EntityType Name="Trener">
+          <Key>
+            <PropertyRef Name="LICBR_TRN" />
+          </Key>
+          <Property Name="LICBR_TRN" Type="String" MaxLength="64" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="IME_TRN" Type="String" MaxLength="64" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="PRZ_TRN" Type="String" MaxLength="64" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="PDATUG_TRN" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="KDATUG_TRN" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Klub_ID_KLB" Type="String" MaxLength="64" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Klub" Relationship="Self.Trener_Klub_FK" FromRole="Trener" ToRole="Klub" />
+        </EntityType>
+        <EntityType Name="Utakmica">
+          <Key>
+            <PropertyRef Name="OZN_UTK" />
+          </Key>
+          <Property Name="OZN_UTK" Type="String" MaxLength="64" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="RBRKOLA_UTK" Type="Int32" Nullable="false" />
+          <Property Name="DOMPOENI_UTK" Type="Int32" />
+          <Property Name="GOSTPOENI_UTK" Type="Int32" />
+          <Property Name="KONFMDJ_UTK" Type="Boolean" Nullable="false" />
+          <Property Name="Evroliga_OZN_LIG" Type="String" MaxLength="64" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Klub_ID_KLB1" Type="String" MaxLength="64" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Klub_ID_KLB" Type="String" MaxLength="64" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Evroliga" Relationship="Self.Utakmica_Evroliga_FK" FromRole="Utakmica" ToRole="Evroliga" />
+          <NavigationProperty Name="IgracIgras" Relationship="Self.IgracIgra_Utakmica_FK" FromRole="Utakmica" ToRole="IgracIgra" />
+          <NavigationProperty Name="Klub" Relationship="Self.Utakmica_Klub_FK" FromRole="Utakmica" ToRole="Klub" />
+          <NavigationProperty Name="Klub1" Relationship="Self.Utakmica_Klub_FKv2" FromRole="Utakmica" ToRole="Klub" />
+          <NavigationProperty Name="Sudis" Relationship="Self.Sudi_Utakmica_FK" FromRole="Utakmica" ToRole="Sudi" />
+        </EntityType>
+        <Association Name="Klub_Evroliga_FK">
+          <End Role="Evroliga" Type="Self.Evroliga" Multiplicity="1" />
+          <End Role="Klub" Type="Self.Klub" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Evroliga">
+              <PropertyRef Name="OZN_LIG" />
+            </Principal>
+            <Dependent Role="Klub">
+              <PropertyRef Name="Evroliga_OZN_LIG" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Sudija_Evroliga_FK">
+          <End Role="Evroliga" Type="Self.Evroliga" Multiplicity="1" />
+          <End Role="Sudija" Type="Self.Sudija" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Evroliga">
+              <PropertyRef Name="OZN_LIG" />
+            </Principal>
+            <Dependent Role="Sudija">
+              <PropertyRef Name="Evroliga_OZN_LIG" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Utakmica_Evroliga_FK">
+          <End Role="Evroliga" Type="Self.Evroliga" Multiplicity="1" />
+          <End Role="Utakmica" Type="Self.Utakmica" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Evroliga">
+              <PropertyRef Name="OZN_LIG" />
+            </Principal>
+            <Dependent Role="Utakmica">
+              <PropertyRef Name="Evroliga_OZN_LIG" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Rezervacija_Hala_FK">
+          <End Role="Hala" Type="Self.Hala" Multiplicity="1" />
+          <End Role="Rezervacija" Type="Self.Rezervacija" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Hala">
+              <PropertyRef Name="OZN_HALA" />
+            </Principal>
+            <Dependent Role="Rezervacija">
+              <PropertyRef Name="Hala_OZN_HALA" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Igrac_Klub_FK">
+          <End Role="Klub" Type="Self.Klub" Multiplicity="1" />
+          <End Role="Igrac" Type="Self.Igrac" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Klub">
+              <PropertyRef Name="ID_KLB" />
+            </Principal>
+            <Dependent Role="Igrac">
+              <PropertyRef Name="Klub_ID_KLB" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="IgracIgra_Igrac_FK">
+          <End Role="Igrac" Type="Self.Igrac" Multiplicity="1" />
+          <End Role="IgracIgra" Type="Self.IgracIgra" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Igrac">
+              <PropertyRef Name="LICBR_IGR" />
+            </Principal>
+            <Dependent Role="IgracIgra">
+              <PropertyRef Name="Igrac_LICBR_IGR" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="IgracIgra_Utakmica_FK">
+          <End Role="Utakmica" Type="Self.Utakmica" Multiplicity="1" />
+          <End Role="IgracIgra" Type="Self.IgracIgra" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Utakmica">
+              <PropertyRef Name="OZN_UTK" />
+            </Principal>
+            <Dependent Role="IgracIgra">
+              <PropertyRef Name="Utakmica_OZN_UTK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Rezervacija_Klub_FK">
+          <End Role="Klub" Type="Self.Klub" Multiplicity="1" />
+          <End Role="Rezervacija" Type="Self.Rezervacija" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Klub">
+              <PropertyRef Name="ID_KLB" />
+            </Principal>
+            <Dependent Role="Rezervacija">
+              <PropertyRef Name="Klub_ID_KLB" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Trener_Klub_FK">
+          <End Role="Klub" Type="Self.Klub" Multiplicity="1" />
+          <End Role="Trener" Type="Self.Trener" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Klub">
+              <PropertyRef Name="ID_KLB" />
+            </Principal>
+            <Dependent Role="Trener">
+              <PropertyRef Name="Klub_ID_KLB" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Utakmica_Klub_FK">
+          <End Role="Klub" Type="Self.Klub" Multiplicity="1" />
+          <End Role="Utakmica" Type="Self.Utakmica" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Klub">
+              <PropertyRef Name="ID_KLB" />
+            </Principal>
+            <Dependent Role="Utakmica">
+              <PropertyRef Name="Klub_ID_KLB" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Utakmica_Klub_FKv2">
+          <End Role="Klub" Type="Self.Klub" Multiplicity="1" />
+          <End Role="Utakmica" Type="Self.Utakmica" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Klub">
+              <PropertyRef Name="ID_KLB" />
+            </Principal>
+            <Dependent Role="Utakmica">
+              <PropertyRef Name="Klub_ID_KLB1" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Sudi_Sudija_FK">
+          <End Role="Sudija" Type="Self.Sudija" Multiplicity="1" />
+          <End Role="Sudi" Type="Self.Sudi" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sudija">
+              <PropertyRef Name="LICBR_SUD" />
+            </Principal>
+            <Dependent Role="Sudi">
+              <PropertyRef Name="Sudija_LICBR_SUD" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Sudi_Utakmica_FK">
+          <End Role="Utakmica" Type="Self.Utakmica" Multiplicity="1" />
+          <End Role="Sudi" Type="Self.Sudi" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Utakmica">
+              <PropertyRef Name="OZN_UTK" />
+            </Principal>
+            <Dependent Role="Sudi">
+              <PropertyRef Name="Utakmica_OZN_UTK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="EuroleagueEntities3" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Evroligas" EntityType="Self.Evroliga" />
+          <EntitySet Name="Halas" EntityType="Self.Hala" />
+          <EntitySet Name="Igracs" EntityType="Self.Igrac" />
+          <EntitySet Name="IgracIgras" EntityType="Self.IgracIgra" />
+          <EntitySet Name="Klubs" EntityType="Self.Klub" />
+          <EntitySet Name="Nalogs" EntityType="Self.Nalog" />
+          <EntitySet Name="Rezervacijas" EntityType="Self.Rezervacija" />
+          <EntitySet Name="Sudis" EntityType="Self.Sudi" />
+          <EntitySet Name="Sudijas" EntityType="Self.Sudija" />
+          <EntitySet Name="Treners" EntityType="Self.Trener" />
+          <EntitySet Name="Utakmicas" EntityType="Self.Utakmica" />
+          <AssociationSet Name="Klub_Evroliga_FK" Association="Self.Klub_Evroliga_FK">
+            <End Role="Evroliga" EntitySet="Evroligas" />
+            <End Role="Klub" EntitySet="Klubs" />
+          </AssociationSet>
+          <AssociationSet Name="Sudija_Evroliga_FK" Association="Self.Sudija_Evroliga_FK">
+            <End Role="Evroliga" EntitySet="Evroligas" />
+            <End Role="Sudija" EntitySet="Sudijas" />
+          </AssociationSet>
+          <AssociationSet Name="Utakmica_Evroliga_FK" Association="Self.Utakmica_Evroliga_FK">
+            <End Role="Evroliga" EntitySet="Evroligas" />
+            <End Role="Utakmica" EntitySet="Utakmicas" />
+          </AssociationSet>
+          <AssociationSet Name="Rezervacija_Hala_FK" Association="Self.Rezervacija_Hala_FK">
+            <End Role="Hala" EntitySet="Halas" />
+            <End Role="Rezervacija" EntitySet="Rezervacijas" />
+          </AssociationSet>
+          <AssociationSet Name="Igrac_Klub_FK" Association="Self.Igrac_Klub_FK">
+            <End Role="Klub" EntitySet="Klubs" />
+            <End Role="Igrac" EntitySet="Igracs" />
+          </AssociationSet>
+          <AssociationSet Name="IgracIgra_Igrac_FK" Association="Self.IgracIgra_Igrac_FK">
+            <End Role="Igrac" EntitySet="Igracs" />
+            <End Role="IgracIgra" EntitySet="IgracIgras" />
+          </AssociationSet>
+          <AssociationSet Name="IgracIgra_Utakmica_FK" Association="Self.IgracIgra_Utakmica_FK">
+            <End Role="Utakmica" EntitySet="Utakmicas" />
+            <End Role="IgracIgra" EntitySet="IgracIgras" />
+          </AssociationSet>
+          <AssociationSet Name="Rezervacija_Klub_FK" Association="Self.Rezervacija_Klub_FK">
+            <End Role="Klub" EntitySet="Klubs" />
+            <End Role="Rezervacija" EntitySet="Rezervacijas" />
+          </AssociationSet>
+          <AssociationSet Name="Trener_Klub_FK" Association="Self.Trener_Klub_FK">
+            <End Role="Klub" EntitySet="Klubs" />
+            <End Role="Trener" EntitySet="Treners" />
+          </AssociationSet>
+          <AssociationSet Name="Utakmica_Klub_FK" Association="Self.Utakmica_Klub_FK">
+            <End Role="Klub" EntitySet="Klubs" />
+            <End Role="Utakmica" EntitySet="Utakmicas" />
+          </AssociationSet>
+          <AssociationSet Name="Utakmica_Klub_FKv2" Association="Self.Utakmica_Klub_FKv2">
+            <End Role="Klub" EntitySet="Klubs" />
+            <End Role="Utakmica" EntitySet="Utakmicas" />
+          </AssociationSet>
+          <AssociationSet Name="Sudi_Sudija_FK" Association="Self.Sudi_Sudija_FK">
+            <End Role="Sudija" EntitySet="Sudijas" />
+            <End Role="Sudi" EntitySet="Sudis" />
+          </AssociationSet>
+          <AssociationSet Name="Sudi_Utakmica_FK" Association="Self.Sudi_Utakmica_FK">
+            <End Role="Utakmica" EntitySet="Utakmicas" />
+            <End Role="Sudi" EntitySet="Sudis" />
+          </AssociationSet>
+          <FunctionImport Name="DateValidationReservation">
+            <Parameter Name="startDate" Mode="In" Type="DateTime" />
+            <Parameter Name="endDate" Mode="In" Type="DateTime" />
+            <Parameter Name="hallId" Mode="In" Type="String" />
+            <Parameter Name="isOk" Mode="InOut" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="DateValidationReservationModify">
+            <Parameter Name="startDate" Mode="In" Type="DateTime" />
+            <Parameter Name="endDate" Mode="In" Type="DateTime" />
+            <Parameter Name="oldRezId" Mode="In" Type="String" />
+            <Parameter Name="oldHalaOzn" Mode="In" Type="String" />
+            <Parameter Name="isOk" Mode="InOut" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="Stats">
+            <Parameter Name="playerId" Mode="In" Type="String" />
+            <Parameter Name="name" Mode="InOut" Type="String" />
+            <Parameter Name="games" Mode="InOut" Type="Int32" />
+            <Parameter Name="pts" Mode="InOut" Type="Double" />
+            <Parameter Name="as" Mode="InOut" Type="Double" />
+            <Parameter Name="reb" Mode="InOut" Type="Double" />
+          </FunctionImport>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Euroleague3ModelStoreContainer" CdmEntityContainer="EuroleagueEntities3">
+          <EntitySetMapping Name="Evroligas">
+            <EntityTypeMapping TypeName="Euroleague3Model.Evroliga">
+              <MappingFragment StoreEntitySet="Evroliga">
+                <ScalarProperty Name="OZN_LIG" ColumnName="OZN_LIG" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Halas">
+            <EntityTypeMapping TypeName="Euroleague3Model.Hala">
+              <MappingFragment StoreEntitySet="Hala">
+                <ScalarProperty Name="OZN_HALA" ColumnName="OZN_HALA" />
+                <ScalarProperty Name="NAZ_HALA" ColumnName="NAZ_HALA" />
+                <ScalarProperty Name="DRZ_HALA" ColumnName="DRZ_HALA" />
+                <ScalarProperty Name="GRD_HALA" ColumnName="GRD_HALA" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Igracs">
+            <EntityTypeMapping TypeName="Euroleague3Model.Igrac">
+              <MappingFragment StoreEntitySet="Igrac">
+                <ScalarProperty Name="LICBR_IGR" ColumnName="LICBR_IGR" />
+                <ScalarProperty Name="IME_IGR" ColumnName="IME_IGR" />
+                <ScalarProperty Name="PRZ_IGR" ColumnName="PRZ_IGR" />
+                <ScalarProperty Name="PDATUG_IGR" ColumnName="PDATUG_IGR" />
+                <ScalarProperty Name="KDATUG_IGR" ColumnName="KDATUG_IGR" />
+                <ScalarProperty Name="POZ_IGR" ColumnName="POZ_IGR" />
+                <ScalarProperty Name="VIS_IGR" ColumnName="VIS_IGR" />
+                <ScalarProperty Name="SLIKA_IGR" ColumnName="SLIKA_IGR" />
+                <ScalarProperty Name="Klub_ID_KLB" ColumnName="Klub_ID_KLB" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="IgracIgras">
+            <EntityTypeMapping TypeName="Euroleague3Model.IgracIgra">
+              <MappingFragment StoreEntitySet="IgracIgra">
+                <ScalarProperty Name="POENI_IGRACIGRA" ColumnName="POENI_IGRACIGRA" />
+                <ScalarProperty Name="AS_IGRACIGRA" ColumnName="AS_IGRACIGRA" />
+                <ScalarProperty Name="SK_IGRACIGRA" ColumnName="SK_IGRACIGRA" />
+                <ScalarProperty Name="Utakmica_OZN_UTK" ColumnName="Utakmica_OZN_UTK" />
+                <ScalarProperty Name="Igrac_LICBR_IGR" ColumnName="Igrac_LICBR_IGR" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Klubs">
+            <EntityTypeMapping TypeName="Euroleague3Model.Klub">
+              <MappingFragment StoreEntitySet="Klub">
+                <ScalarProperty Name="ID_KLB" ColumnName="ID_KLB" />
+                <ScalarProperty Name="NAZ_KLB" ColumnName="NAZ_KLB" />
+                <ScalarProperty Name="DRZ_KLB" ColumnName="DRZ_KLB" />
+                <ScalarProperty Name="GRD_KLB" ColumnName="GRD_KLB" />
+                <ScalarProperty Name="POB_KLB" ColumnName="POB_KLB" />
+                <ScalarProperty Name="POR_KLB" ColumnName="POR_KLB" />
+                <ScalarProperty Name="KOSRAZ_KLB" ColumnName="KOSRAZ_KLB" />
+                <ScalarProperty Name="Evroliga_OZN_LIG" ColumnName="Evroliga_OZN_LIG" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Nalogs">
+            <EntityTypeMapping TypeName="Euroleague3Model.Nalog">
+              <MappingFragment StoreEntitySet="Nalog">
+                <ScalarProperty Name="IME_NLG" ColumnName="IME_NLG" />
+                <ScalarProperty Name="SFR_NLG" ColumnName="SFR_NLG" />
+                <ScalarProperty Name="ULOGA_NLG" ColumnName="ULOGA_NLG" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Rezervacijas">
+            <EntityTypeMapping TypeName="Euroleague3Model.Rezervacija">
+              <MappingFragment StoreEntitySet="Rezervacija">
+                <ScalarProperty Name="Klub_ID_KLB" ColumnName="Klub_ID_KLB" />
+                <ScalarProperty Name="Hala_OZN_HALA" ColumnName="Hala_OZN_HALA" />
+                <ScalarProperty Name="PVRMREZ_HALA" ColumnName="PVRMREZ_HALA" />
+                <ScalarProperty Name="KVRMREZ_HALA" ColumnName="KVRMREZ_HALA" />
+                <ScalarProperty Name="SFR_REZ" ColumnName="SFR_REZ" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Sudis">
+            <EntityTypeMapping TypeName="Euroleague3Model.Sudi">
+              <MappingFragment StoreEntitySet="Sudi">
+                <ScalarProperty Name="Sudija_LICBR_SUD" ColumnName="Sudija_LICBR_SUD" />
+                <ScalarProperty Name="Utakmica_OZN_UTK" ColumnName="Utakmica_OZN_UTK" />
+                <ScalarProperty Name="ID_SUDI" ColumnName="ID_SUDI" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Sudijas">
+            <EntityTypeMapping TypeName="Euroleague3Model.Sudija">
+              <MappingFragment StoreEntitySet="Sudija">
+                <ScalarProperty Name="LICBR_SUD" ColumnName="LICBR_SUD" />
+                <ScalarProperty Name="IME_SUD" ColumnName="IME_SUD" />
+                <ScalarProperty Name="PRZ_SUD" ColumnName="PRZ_SUD" />
+                <ScalarProperty Name="DRZ_SUD" ColumnName="DRZ_SUD" />
+                <ScalarProperty Name="Evroliga_OZN_LIG" ColumnName="Evroliga_OZN_LIG" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Treners">
+            <EntityTypeMapping TypeName="Euroleague3Model.Trener">
+              <MappingFragment StoreEntitySet="Trener">
+                <ScalarProperty Name="LICBR_TRN" ColumnName="LICBR_TRN" />
+                <ScalarProperty Name="IME_TRN" ColumnName="IME_TRN" />
+                <ScalarProperty Name="PRZ_TRN" ColumnName="PRZ_TRN" />
+                <ScalarProperty Name="PDATUG_TRN" ColumnName="PDATUG_TRN" />
+                <ScalarProperty Name="KDATUG_TRN" ColumnName="KDATUG_TRN" />
+                <ScalarProperty Name="Klub_ID_KLB" ColumnName="Klub_ID_KLB" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Utakmicas">
+            <EntityTypeMapping TypeName="Euroleague3Model.Utakmica">
+              <MappingFragment StoreEntitySet="Utakmica">
+                <ScalarProperty Name="OZN_UTK" ColumnName="OZN_UTK" />
+                <ScalarProperty Name="RBRKOLA_UTK" ColumnName="RBRKOLA_UTK" />
+                <ScalarProperty Name="DOMPOENI_UTK" ColumnName="DOMPOENI_UTK" />
+                <ScalarProperty Name="GOSTPOENI_UTK" ColumnName="GOSTPOENI_UTK" />
+                <ScalarProperty Name="KONFMDJ_UTK" ColumnName="KONFMDJ_UTK" />
+                <ScalarProperty Name="Evroliga_OZN_LIG" ColumnName="Evroliga_OZN_LIG" />
+                <ScalarProperty Name="Klub_ID_KLB1" ColumnName="Klub_ID_KLB1" />
+                <ScalarProperty Name="Klub_ID_KLB" ColumnName="Klub_ID_KLB" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="DateValidationReservation" FunctionName="Euroleague3Model.Store.DateValidationReservation" />
+          <FunctionImportMapping FunctionImportName="DateValidationReservationModify" FunctionName="Euroleague3Model.Store.DateValidationReservationModify" />
+          <FunctionImportMapping FunctionImportName="Stats" FunctionName="Euroleague3Model.Store.Stats" />
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

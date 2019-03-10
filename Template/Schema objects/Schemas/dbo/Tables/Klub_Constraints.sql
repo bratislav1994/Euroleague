@@ -1,0 +1,6 @@
+ALTER TABLE Klub ADD CONSTRAINT Klub_PK PRIMARY KEY CLUSTERED (ID_KLB)
+     WITH (
+     ALLOW_PAGE_LOCKS = ON , 
+     ALLOW_ROW_LOCKS = ON )
+     ON "default" 
+    GO

@@ -1,0 +1,28 @@
+﻿** Highlights
+     Tables that will be rebuilt
+       None
+     Clustered indexes that will be dropped
+       None
+     Clustered indexes that will be created
+       None
+     Possible data issues
+       None
+
+** User actions
+     Create
+       [dbo].[Evroliga] (Table)
+       [dbo].[Hala] (Table)
+       [dbo].[Igrac] (Table)
+       [dbo].[IgracIgra] (Table)
+       [dbo].[Klub] (Table)
+       [dbo].[KonferencijaZaMedije] (Table)
+       [dbo].[Nalog] (Table)
+       [dbo].[Radnik] (Table)
+       [dbo].[Rezervacija] (Table)
+       [dbo].[StatistickiPodaci] (Table)
+       [dbo].[Sudi] (Table)
+       [dbo].[Sudija] (Table)
+       [dbo].[Trener] (Table)
+       [dbo].[Utakmica] (Table)
+
+** Supporting actions

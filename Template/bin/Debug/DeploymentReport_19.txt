@@ -1,0 +1,193 @@
+﻿** Highlights
+     Tables that will be rebuilt
+       [dbo].[Evroliga]
+       [dbo].[Hala]
+       [dbo].[Igrac]
+       [dbo].[IgracIgra]
+       [dbo].[Klub]
+       [dbo].[Nalog]
+       [dbo].[Rezervacija]
+       [dbo].[Sudi]
+       [dbo].[Sudija]
+       [dbo].[Trener]
+       [dbo].[Utakmica]
+     Clustered indexes that will be dropped
+       None
+     Clustered indexes that will be created
+       None
+     Possible data issues
+       The type for column OZN_LIG in table [dbo].[Evroliga] is currently  NVARCHAR (20) NOT NULL but is being changed to 
+         VARCHAR (64) NOT NULL. Data loss could occur.
+       The type for column DRZ_HALA in table [dbo].[Hala] is currently  NVARCHAR (20) NOT NULL but is being changed to  VARCHAR
+         (64) NOT NULL. Data loss could occur.
+       The type for column GRD_HALA in table [dbo].[Hala] is currently  NVARCHAR (20) NOT NULL but is being changed to  VARCHAR
+         (64) NOT NULL. Data loss could occur.
+       The type for column NAZ_HALA in table [dbo].[Hala] is currently  NVARCHAR (40) NOT NULL but is being changed to  VARCHAR
+         (64) NOT NULL. Data loss could occur.
+       The type for column OZN_HALA in table [dbo].[Hala] is currently  NVARCHAR (20) NOT NULL but is being changed to  VARCHAR
+         (64) NOT NULL. Data loss could occur.
+       The column [dbo].[Igrac].[MBR_IGR] is being dropped, data loss could occur.
+       The column [dbo].[Igrac].[SLIKA_IGR] on table [dbo].[Igrac] must be added, but the column has no default value and does
+         not allow NULL values. If the table contains data, the ALTER script will not work. To avoid this issue you must either:
+         add a default value to the column, mark it as allowing NULL values, or enable the generation of smart-defaults as a
+         deployment option.
+       The type for column IME_IGR in table [dbo].[Igrac] is currently  NVARCHAR (20) NOT NULL but is being changed to  VARCHAR
+         (64) NOT NULL. Data loss could occur.
+       The type for column Klub_ID_KLB in table [dbo].[Igrac] is currently  NVARCHAR (20) NULL but is being changed to  VARCHAR
+         (64) NOT NULL. Data loss could occur.
+       The type for column LICBR_IGR in table [dbo].[Igrac] is currently  NVARCHAR (20) NOT NULL but is being changed to 
+         VARCHAR (64) NOT NULL. Data loss could occur.
+       The type for column POZ_IGR in table [dbo].[Igrac] is currently  NVARCHAR (20) NOT NULL but is being changed to  VARCHAR
+         (64) NOT NULL. Data loss could occur.
+       The type for column PRZ_IGR in table [dbo].[Igrac] is currently  NVARCHAR (20) NOT NULL but is being changed to  VARCHAR
+         (64) NOT NULL. Data loss could occur.
+       The column [dbo].[IgracIgra].[OZN_STSPOD] is being dropped, data loss could occur.
+       The column [dbo].[IgracIgra].[Utakmica_OZN_LIG] is being dropped, data loss could occur.
+       The column [dbo].[IgracIgra].[AS_IGRACIGRA] on table [dbo].[IgracIgra] must be added, but the column has no default
+         value and does not allow NULL values. If the table contains data, the ALTER script will not work. To avoid this issue
+         you must either: add a default value to the column, mark it as allowing NULL values, or enable the generation of
+         smart-defaults as a deployment option.
+       The column [dbo].[IgracIgra].[POENI_IGRACIGRA] on table [dbo].[IgracIgra] must be added, but the column has no default
+         value and does not allow NULL values. If the table contains data, the ALTER script will not work. To avoid this issue
+         you must either: add a default value to the column, mark it as allowing NULL values, or enable the generation of
+         smart-defaults as a deployment option.
+       The column [dbo].[IgracIgra].[SK_IGRACIGRA] on table [dbo].[IgracIgra] must be added, but the column has no default
+         value and does not allow NULL values. If the table contains data, the ALTER script will not work. To avoid this issue
+         you must either: add a default value to the column, mark it as allowing NULL values, or enable the generation of
+         smart-defaults as a deployment option.
+       The type for column Igrac_LICBR_IGR in table [dbo].[IgracIgra] is currently  NVARCHAR (20) NOT NULL but is being changed
+         to  VARCHAR (64) NOT NULL. Data loss could occur.
+       The type for column Utakmica_OZN_UTK in table [dbo].[IgracIgra] is currently  NVARCHAR (20) NOT NULL but is being
+         changed to  VARCHAR (64) NOT NULL. Data loss could occur.
+       The type for column DRZ_KLB in table [dbo].[Klub] is currently  NVARCHAR (20) NOT NULL but is being changed to  VARCHAR
+         (64) NOT NULL. Data loss could occur.
+       The type for column Evroliga_OZN_LIG in table [dbo].[Klub] is currently  NVARCHAR (20) NOT NULL but is being changed to 
+         VARCHAR (64) NOT NULL. Data loss could occur.
+       The type for column GRD_KLB in table [dbo].[Klub] is currently  NVARCHAR (20) NOT NULL but is being changed to  VARCHAR
+         (64) NOT NULL. Data loss could occur.
+       The type for column ID_KLB in table [dbo].[Klub] is currently  NVARCHAR (20) NOT NULL but is being changed to  VARCHAR
+         (64) NOT NULL. Data loss could occur.
+       The type for column NAZ_KLB in table [dbo].[Klub] is currently  NVARCHAR (20) NOT NULL but is being changed to  VARCHAR
+         (64) NOT NULL. Data loss could occur.
+       The type for column IME_NLG in table [dbo].[Nalog] is currently  NVARCHAR (20) NOT NULL but is being changed to  VARCHAR
+         (64) NOT NULL. Data loss could occur.
+       The type for column SFR_NLG in table [dbo].[Nalog] is currently  NVARCHAR (20) NOT NULL but is being changed to  VARCHAR
+         (64) NOT NULL. Data loss could occur.
+       The type for column ULOGA_NLG in table [dbo].[Nalog] is currently  NVARCHAR (20) NOT NULL but is being changed to 
+         VARCHAR (64) NOT NULL. Data loss could occur.
+       The type for column Hala_OZN_HALA in table [dbo].[Rezervacija] is currently  NVARCHAR (20) NOT NULL but is being changed
+         to  VARCHAR (64) NOT NULL. Data loss could occur.
+       The type for column Klub_ID_KLB in table [dbo].[Rezervacija] is currently  NVARCHAR (20) NOT NULL but is being changed
+         to  VARCHAR (64) NOT NULL. Data loss could occur.
+       The type for column SFR_REZ in table [dbo].[Rezervacija] is currently  NVARCHAR (20) NOT NULL but is being changed to 
+         VARCHAR (64) NOT NULL. Data loss could occur.
+       The column [dbo].[Sudi].[Utakmica_OZN_LIG] is being dropped, data loss could occur.
+       The type for column Sudija_LICBR_SUD in table [dbo].[Sudi] is currently  NVARCHAR (20) NOT NULL but is being changed to 
+         VARCHAR (64) NOT NULL. Data loss could occur.
+       The type for column Utakmica_OZN_UTK in table [dbo].[Sudi] is currently  NVARCHAR (20) NOT NULL but is being changed to 
+         VARCHAR (64) NOT NULL. Data loss could occur.
+       The type for column DRZ_SUD in table [dbo].[Sudija] is currently  NVARCHAR (40) NOT NULL but is being changed to 
+         VARCHAR (64) NOT NULL. Data loss could occur.
+       The type for column Evroliga_OZN_LIG in table [dbo].[Sudija] is currently  NVARCHAR (20) NOT NULL but is being changed
+         to  VARCHAR (64) NOT NULL. Data loss could occur.
+       The type for column IME_SUD in table [dbo].[Sudija] is currently  NVARCHAR (20) NOT NULL but is being changed to 
+         VARCHAR (64) NOT NULL. Data loss could occur.
+       The type for column LICBR_SUD in table [dbo].[Sudija] is currently  NVARCHAR (20) NOT NULL but is being changed to 
+         VARCHAR (64) NOT NULL. Data loss could occur.
+       The type for column PRZ_SUD in table [dbo].[Sudija] is currently  NVARCHAR (20) NOT NULL but is being changed to 
+         VARCHAR (64) NOT NULL. Data loss could occur.
+       The column [dbo].[Trener].[MBR_TRN] is being dropped, data loss could occur.
+       The type for column IME_TRN in table [dbo].[Trener] is currently  NVARCHAR (20) NOT NULL but is being changed to 
+         VARCHAR (64) NOT NULL. Data loss could occur.
+       The type for column Klub_ID_KLB in table [dbo].[Trener] is currently  NVARCHAR (20) NOT NULL but is being changed to 
+         VARCHAR (64) NOT NULL. Data loss could occur.
+       The type for column LICBR_TRN in table [dbo].[Trener] is currently  NVARCHAR (20) NOT NULL but is being changed to 
+         VARCHAR (64) NOT NULL. Data loss could occur.
+       The type for column PRZ_TRN in table [dbo].[Trener] is currently  NVARCHAR (20) NOT NULL but is being changed to 
+         VARCHAR (64) NOT NULL. Data loss could occur.
+       The column [dbo].[Utakmica].[OZN_KONFMDJ] is being dropped, data loss could occur.
+       The column [dbo].[Utakmica].[KONFMDJ_UTK] on table [dbo].[Utakmica] must be added, but the column has no default value
+         and does not allow NULL values. If the table contains data, the ALTER script will not work. To avoid this issue you must
+         either: add a default value to the column, mark it as allowing NULL values, or enable the generation of smart-defaults
+         as a deployment option.
+       The type for column Evroliga_OZN_LIG in table [dbo].[Utakmica] is currently  NVARCHAR (20) NOT NULL but is being changed
+         to  VARCHAR (64) NOT NULL. Data loss could occur.
+       The type for column Klub_ID_KLB in table [dbo].[Utakmica] is currently  NVARCHAR (20) NOT NULL but is being changed to 
+         VARCHAR (64) NOT NULL. Data loss could occur.
+       The type for column Klub_ID_KLB1 in table [dbo].[Utakmica] is currently  NVARCHAR (20) NOT NULL but is being changed to 
+         VARCHAR (64) NOT NULL. Data loss could occur.
+       The type for column OZN_UTK in table [dbo].[Utakmica] is currently  NVARCHAR (20) NOT NULL but is being changed to 
+         VARCHAR (64) NOT NULL. Data loss could occur.
+
+** User actions
+     Table rebuild
+       [dbo].[Evroliga] (Table)
+       [dbo].[Hala] (Table)
+       [dbo].[Igrac] (Table)
+       [dbo].[IgracIgra] (Table)
+       [dbo].[Klub] (Table)
+       [dbo].[Nalog] (Table)
+       [dbo].[Rezervacija] (Table)
+       [dbo].[Sudi] (Table)
+       [dbo].[Sudija] (Table)
+       [dbo].[Trener] (Table)
+       [dbo].[Utakmica] (Table)
+     Alter
+       [dbo].[DateValidationReservation] (Procedure)
+     Create
+       [dbo].[DateValidationReservationModify] (Procedure)
+       [dbo].[Stats] (Procedure)
+
+** Supporting actions
+
+The type for column OZN_LIG in table [dbo].[Evroliga] is currently  NVARCHAR (20) NOT NULL but is being changed to  VARCHAR (64) NOT NULL. Data loss could occur.
+The type for column DRZ_HALA in table [dbo].[Hala] is currently  NVARCHAR (20) NOT NULL but is being changed to  VARCHAR (64) NOT NULL. Data loss could occur.
+The type for column GRD_HALA in table [dbo].[Hala] is currently  NVARCHAR (20) NOT NULL but is being changed to  VARCHAR (64) NOT NULL. Data loss could occur.
+The type for column NAZ_HALA in table [dbo].[Hala] is currently  NVARCHAR (40) NOT NULL but is being changed to  VARCHAR (64) NOT NULL. Data loss could occur.
+The type for column OZN_HALA in table [dbo].[Hala] is currently  NVARCHAR (20) NOT NULL but is being changed to  VARCHAR (64) NOT NULL. Data loss could occur.
+The column [dbo].[Igrac].[MBR_IGR] is being dropped, data loss could occur.
+The column [dbo].[Igrac].[SLIKA_IGR] on table [dbo].[Igrac] must be added, but the column has no default value and does not allow NULL values. If the table contains data, the ALTER script will not work. To avoid this issue you must either: add a default value to the column, mark it as allowing NULL values, or enable the generation of smart-defaults as a deployment option.
+The type for column IME_IGR in table [dbo].[Igrac] is currently  NVARCHAR (20) NOT NULL but is being changed to  VARCHAR (64) NOT NULL. Data loss could occur.
+The column Klub_ID_KLB on table [dbo].[Igrac] must be changed from NULL to NOT NULL. If the table contains data, the ALTER script may not work. To avoid this issue, you must add values to this column for all rows or mark it as allowing NULL values, or enable the generation of smart-defaults as a deployment option.
+The type for column Klub_ID_KLB in table [dbo].[Igrac] is currently  NVARCHAR (20) NULL but is being changed to  VARCHAR (64) NOT NULL. Data loss could occur.
+The type for column LICBR_IGR in table [dbo].[Igrac] is currently  NVARCHAR (20) NOT NULL but is being changed to  VARCHAR (64) NOT NULL. Data loss could occur.
+The type for column POZ_IGR in table [dbo].[Igrac] is currently  NVARCHAR (20) NOT NULL but is being changed to  VARCHAR (64) NOT NULL. Data loss could occur.
+The type for column PRZ_IGR in table [dbo].[Igrac] is currently  NVARCHAR (20) NOT NULL but is being changed to  VARCHAR (64) NOT NULL. Data loss could occur.
+The column [dbo].[IgracIgra].[OZN_STSPOD] is being dropped, data loss could occur.
+The column [dbo].[IgracIgra].[Utakmica_OZN_LIG] is being dropped, data loss could occur.
+The column [dbo].[IgracIgra].[AS_IGRACIGRA] on table [dbo].[IgracIgra] must be added, but the column has no default value and does not allow NULL values. If the table contains data, the ALTER script will not work. To avoid this issue you must either: add a default value to the column, mark it as allowing NULL values, or enable the generation of smart-defaults as a deployment option.
+The column [dbo].[IgracIgra].[POENI_IGRACIGRA] on table [dbo].[IgracIgra] must be added, but the column has no default value and does not allow NULL values. If the table contains data, the ALTER script will not work. To avoid this issue you must either: add a default value to the column, mark it as allowing NULL values, or enable the generation of smart-defaults as a deployment option.
+The column [dbo].[IgracIgra].[SK_IGRACIGRA] on table [dbo].[IgracIgra] must be added, but the column has no default value and does not allow NULL values. If the table contains data, the ALTER script will not work. To avoid this issue you must either: add a default value to the column, mark it as allowing NULL values, or enable the generation of smart-defaults as a deployment option.
+The type for column Igrac_LICBR_IGR in table [dbo].[IgracIgra] is currently  NVARCHAR (20) NOT NULL but is being changed to  VARCHAR (64) NOT NULL. Data loss could occur.
+The type for column Utakmica_OZN_UTK in table [dbo].[IgracIgra] is currently  NVARCHAR (20) NOT NULL but is being changed to  VARCHAR (64) NOT NULL. Data loss could occur.
+The type for column DRZ_KLB in table [dbo].[Klub] is currently  NVARCHAR (20) NOT NULL but is being changed to  VARCHAR (64) NOT NULL. Data loss could occur.
+The type for column Evroliga_OZN_LIG in table [dbo].[Klub] is currently  NVARCHAR (20) NOT NULL but is being changed to  VARCHAR (64) NOT NULL. Data loss could occur.
+The type for column GRD_KLB in table [dbo].[Klub] is currently  NVARCHAR (20) NOT NULL but is being changed to  VARCHAR (64) NOT NULL. Data loss could occur.
+The type for column ID_KLB in table [dbo].[Klub] is currently  NVARCHAR (20) NOT NULL but is being changed to  VARCHAR (64) NOT NULL. Data loss could occur.
+The type for column NAZ_KLB in table [dbo].[Klub] is currently  NVARCHAR (20) NOT NULL but is being changed to  VARCHAR (64) NOT NULL. Data loss could occur.
+The type for column IME_NLG in table [dbo].[Nalog] is currently  NVARCHAR (20) NOT NULL but is being changed to  VARCHAR (64) NOT NULL. Data loss could occur.
+The type for column SFR_NLG in table [dbo].[Nalog] is currently  NVARCHAR (20) NOT NULL but is being changed to  VARCHAR (64) NOT NULL. Data loss could occur.
+The type for column ULOGA_NLG in table [dbo].[Nalog] is currently  NVARCHAR (20) NOT NULL but is being changed to  VARCHAR (64) NOT NULL. Data loss could occur.
+The type for column Hala_OZN_HALA in table [dbo].[Rezervacija] is currently  NVARCHAR (20) NOT NULL but is being changed to  VARCHAR (64) NOT NULL. Data loss could occur.
+The type for column Klub_ID_KLB in table [dbo].[Rezervacija] is currently  NVARCHAR (20) NOT NULL but is being changed to  VARCHAR (64) NOT NULL. Data loss could occur.
+The type for column SFR_REZ in table [dbo].[Rezervacija] is currently  NVARCHAR (20) NOT NULL but is being changed to  VARCHAR (64) NOT NULL. Data loss could occur.
+The column [dbo].[Sudi].[Utakmica_OZN_LIG] is being dropped, data loss could occur.
+The type for column Sudija_LICBR_SUD in table [dbo].[Sudi] is currently  NVARCHAR (20) NOT NULL but is being changed to  VARCHAR (64) NOT NULL. Data loss could occur.
+The type for column Utakmica_OZN_UTK in table [dbo].[Sudi] is currently  NVARCHAR (20) NOT NULL but is being changed to  VARCHAR (64) NOT NULL. Data loss could occur.
+The type for column DRZ_SUD in table [dbo].[Sudija] is currently  NVARCHAR (40) NOT NULL but is being changed to  VARCHAR (64) NOT NULL. Data loss could occur.
+The type for column Evroliga_OZN_LIG in table [dbo].[Sudija] is currently  NVARCHAR (20) NOT NULL but is being changed to  VARCHAR (64) NOT NULL. Data loss could occur.
+The type for column IME_SUD in table [dbo].[Sudija] is currently  NVARCHAR (20) NOT NULL but is being changed to  VARCHAR (64) NOT NULL. Data loss could occur.
+The type for column LICBR_SUD in table [dbo].[Sudija] is currently  NVARCHAR (20) NOT NULL but is being changed to  VARCHAR (64) NOT NULL. Data loss could occur.
+The type for column PRZ_SUD in table [dbo].[Sudija] is currently  NVARCHAR (20) NOT NULL but is being changed to  VARCHAR (64) NOT NULL. Data loss could occur.
+The column [dbo].[Trener].[MBR_TRN] is being dropped, data loss could occur.
+The type for column IME_TRN in table [dbo].[Trener] is currently  NVARCHAR (20) NOT NULL but is being changed to  VARCHAR (64) NOT NULL. Data loss could occur.
+The type for column Klub_ID_KLB in table [dbo].[Trener] is currently  NVARCHAR (20) NOT NULL but is being changed to  VARCHAR (64) NOT NULL. Data loss could occur.
+The type for column LICBR_TRN in table [dbo].[Trener] is currently  NVARCHAR (20) NOT NULL but is being changed to  VARCHAR (64) NOT NULL. Data loss could occur.
+The type for column PRZ_TRN in table [dbo].[Trener] is currently  NVARCHAR (20) NOT NULL but is being changed to  VARCHAR (64) NOT NULL. Data loss could occur.
+The column [dbo].[Utakmica].[OZN_KONFMDJ] is being dropped, data loss could occur.
+The column [dbo].[Utakmica].[KONFMDJ_UTK] on table [dbo].[Utakmica] must be added, but the column has no default value and does not allow NULL values. If the table contains data, the ALTER script will not work. To avoid this issue you must either: add a default value to the column, mark it as allowing NULL values, or enable the generation of smart-defaults as a deployment option.
+The type for column Evroliga_OZN_LIG in table [dbo].[Utakmica] is currently  NVARCHAR (20) NOT NULL but is being changed to  VARCHAR (64) NOT NULL. Data loss could occur.
+The type for column Klub_ID_KLB in table [dbo].[Utakmica] is currently  NVARCHAR (20) NOT NULL but is being changed to  VARCHAR (64) NOT NULL. Data loss could occur.
+The type for column Klub_ID_KLB1 in table [dbo].[Utakmica] is currently  NVARCHAR (20) NOT NULL but is being changed to  VARCHAR (64) NOT NULL. Data loss could occur.
+The type for column OZN_UTK in table [dbo].[Utakmica] is currently  NVARCHAR (20) NOT NULL but is being changed to  VARCHAR (64) NOT NULL. Data loss could occur.
+
